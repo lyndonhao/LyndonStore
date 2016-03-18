@@ -16,5 +16,10 @@ namespace PtReduce2016
         {
             InitializeComponent();
         }
+
+        private void PtReuce_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
