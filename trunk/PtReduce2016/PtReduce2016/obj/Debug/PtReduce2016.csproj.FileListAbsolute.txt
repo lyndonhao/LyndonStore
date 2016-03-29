@@ -1,1 +1,9 @@
-c:\users\administrator\documents\visual studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\PtReduce2016.exe.config
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\PtReduce2016.exe.config
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\PtReduce2016.exe
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\PtReduce2016.pdb
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Debug\PtReduce2016.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Debug\PtReduce2016.PtReuce.resources
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Debug\PtReduce2016.Properties.Resources.resources
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Debug\PtReduce2016.csproj.GenerateResource.Cache
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Debug\PtReduce2016.exe
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Debug\PtReduce2016.pdb

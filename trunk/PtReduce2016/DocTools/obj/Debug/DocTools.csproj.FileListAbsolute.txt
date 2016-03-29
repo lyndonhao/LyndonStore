@@ -1,0 +1,5 @@
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\DocTools\bin\Debug\DocTools.dll
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\DocTools\bin\Debug\DocTools.pdb
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\DocTools\obj\Debug\DocTools.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\DocTools\obj\Debug\DocTools.dll
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\DocTools\obj\Debug\DocTools.pdb
