@@ -7,3 +7,5 @@ C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtRedu
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Debug\PtReduce2016.csproj.GenerateResource.Cache
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Debug\PtReduce2016.exe
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Debug\PtReduce2016.pdb
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\DataProcessTools.dll
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\DataProcessTools.pdb

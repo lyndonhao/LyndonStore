@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Collections;
 using DataType;
 
 namespace DataProcessTools
@@ -18,16 +19,15 @@ namespace DataProcessTools
         /// <param name="x_nPosition"></param>字符串所在位置
         /// <returns>true:包含字符串
         /// </returns>false：不包含字符串
-        public bool FindString(string x_sIdentification,string x_sTargetString,ref int x_nPosition,int x_nStartIndex)
+        public static bool FindString(string x_sIdentification,string x_sTargetString,ref List<int> x_nPosition,int x_nStartIndex)
         {
             bool l_bResult = false;
             int i = x_sTargetString.IndexOf(x_sIdentification,x_nStartIndex);
-            if (i < 0) { l_bResult = false; } else { l_bResult = true;  }
-            x_nPosition = i;
+            if (i < 0) { l_bResult = false; } else { l_bResult = true; x_nPosition.Add(i); }
             return l_bResult;
         }
 
-        public bool FindString(string x_sIdentification, string x_sTargetString, ref int[] x_nPosition)
+        public static bool FindString(string x_sIdentification, string x_sTargetString, ref List<int> x_nPosition)
         {
             bool l_bResult = true;
             int i = x_sTargetString.IndexOf(x_sIdentification, 0);
@@ -40,18 +40,19 @@ namespace DataProcessTools
             {
                 int j = 0;
                 int k = new int();
-                x_nPosition[j] = i;
+                x_nPosition.Add(i);
                 do
                 {
                     k = 0;
-                    l_bResult = FindString(x_sIdentification, x_sTargetString, ref k,x_nPosition[j]);
-                    if (l_bResult ==true) {x_nPosition[j+1]=k;j=j+1; }
+                    l_bResult = FindString(x_sIdentification, x_sTargetString, ref x_nPosition, x_nPosition[j]+1);
+                    if (l_bResult ==true) {j=j+1;}
                 }
-                while (l_bResult == false);
+                while (l_bResult == true);
                 l_bResult = true;
                 return l_bResult;
             }
         }
+        //public static
         /// <summary>
         /// 查找字符串
         /// </summary>
