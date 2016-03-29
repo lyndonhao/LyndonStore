@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataProcessTools", "DataPro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataType", "DataType\DataType.csproj", "{31221B5A-DC1F-4C6C-920C-BF0790BABF4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocTools", "DocTools\DocTools.csproj", "{1EA86080-244B-4D05-90D4-B41D9E19D3B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileTools", "DocTools\FileTools.csproj", "{1EA86080-244B-4D05-90D4-B41D9E19D3B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
