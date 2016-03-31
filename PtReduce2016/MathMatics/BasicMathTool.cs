@@ -49,6 +49,7 @@ namespace MathMatics
         public static bool CreatCircle(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3, ref DataType.BasicDataType.vector x_vCenterPoint, ref double x_nRadius)
         {
             bool l_bOk = false;
+            l_bOk = ThreeColline(x_vVector1, x_vVector2, x_vVector3);
             return l_bOk;
         }
     }
