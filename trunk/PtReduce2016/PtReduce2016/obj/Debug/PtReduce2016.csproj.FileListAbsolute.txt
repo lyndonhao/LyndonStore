@@ -9,3 +9,5 @@ C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtRedu
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Debug\PtReduce2016.pdb
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\DataProcessTools.dll
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\DataProcessTools.pdb
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\DataType.dll
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\DataType.pdb

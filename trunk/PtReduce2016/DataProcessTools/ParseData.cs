@@ -39,11 +39,11 @@ namespace DataProcessTools
             else
             {
                 int j = 0;
-                int k = new int();
+                //int k = new int();
                 x_nPosition.Add(i);
                 do
                 {
-                    k = 0;
+                   // k = 0;
                     l_bResult = FindString(x_sIdentification, x_sTargetString, ref x_nPosition, x_nPosition[j]+1);
                     if (l_bResult ==true) {j=j+1;}
                 }
@@ -51,6 +51,47 @@ namespace DataProcessTools
                 l_bResult = true;
                 return l_bResult;
             }
+        }
+        public static bool String2Point(string[] x_sPoint,ref DataType.StaubliRobotData.St_PointRx x_pPoint)
+        {
+            bool l_bOk = false;
+            if (x_sPoint.Length != 6)
+            {
+                l_bOk = false;
+            }
+            else
+            {
+                x_pPoint.x= double.Parse(x_sPoint[0]);
+                x_pPoint.y = double.Parse(x_sPoint[1]);
+                x_pPoint.z = double.Parse(x_sPoint[2]);
+                x_pPoint.Rx = double.Parse(x_sPoint[3]);
+                x_pPoint.Ry = double.Parse(x_sPoint[4]);
+                x_pPoint.Rz = double.Parse(x_sPoint[5]);
+                l_bOk = true;
+            }
+            return l_bOk;
+ 
+        }
+        public static bool getPoint(string x_sIdentifier1,char x_sIdentifier2,string x_sTargetString,DataType.StaubliRobotData.St_PointRx x_pPoint)
+        {
+            bool l_bOk = false;
+            List<int> l_nPosition=new List<int>();
+            l_bOk=FindString(x_sIdentifier1,x_sTargetString,ref l_nPosition);
+            if (l_bOk == true)
+            {
+                try
+                {
+                    string l_sString = x_sTargetString.Substring(l_nPosition[1] + 1, l_nPosition[2] - l_nPosition[1]-1);
+                    string[] l_sPoint = l_sString.Split(x_sIdentifier2);
+                    l_bOk = String2Point(l_sPoint,ref x_pPoint);
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error:getPoint exception: " + ex.Message);
+                }
+            }
+            return l_bOk;
         }
         //public static
         /// <summary>
