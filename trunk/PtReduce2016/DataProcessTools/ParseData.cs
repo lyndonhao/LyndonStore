@@ -12,7 +12,7 @@ namespace DataProcessTools
     public class ParseData
     {
         /// <summary>
-        /// 查找字符串
+        /// 查找标识符在字符串中起始位置后首次出现的位置 test success
         /// </summary>
         /// <param name="x_sIdentification"></param>
         /// <param name="x_sTargetString"></param>
@@ -26,7 +26,13 @@ namespace DataProcessTools
             if (i < 0) { l_bResult = false; } else { l_bResult = true; x_nPosition.Add(i); }
             return l_bResult;
         }
-
+        /// <summary>
+        /// 查找标识符在字符串中的所有位置 test success
+        /// </summary>
+        /// <param name="x_sIdentification"></param>
+        /// <param name="x_sTargetString"></param>
+        /// <param name="x_nPosition"></param>
+        /// <returns></returns>
         public static bool FindString(string x_sIdentification, string x_sTargetString, ref List<int> x_nPosition)
         {
             bool l_bResult = true;
@@ -52,6 +58,12 @@ namespace DataProcessTools
                 return l_bResult;
             }
         }
+        /// <summary>
+        /// 字符串数组转换为点类型 test success
+        /// </summary>
+        /// <param name="x_sPoint"></param>
+        /// <param name="x_pPoint"></param>
+        /// <returns></returns>
         public static bool String2Point(string[] x_sPoint,ref DataType.StaubliRobotData.St_PointRx x_pPoint)
         {
             bool l_bOk = false;
@@ -72,6 +84,14 @@ namespace DataProcessTools
             return l_bOk;
  
         }
+        /// <summary>
+        /// 获取点信息 test success
+        /// </summary>
+        /// <param name="x_sIdentifier1"></param>
+        /// <param name="x_sIdentifier2"></param>
+        /// <param name="x_sTargetString"></param>
+        /// <param name="x_pPoint"></param>
+        /// <returns></returns>
         public static bool getPoint(string x_sIdentifier1,char x_sIdentifier2,string x_sTargetString,DataType.StaubliRobotData.St_PointRx x_pPoint)
         {
             bool l_bOk = false;
