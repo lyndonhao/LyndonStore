@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{31221B5A-DC1F-4C6C-920C-BF0790BABF4B}</ProjectGuid>
+    <ProjectGuid>{4B5940C9-9304-42F7-B3DE-0AAFBB225038}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataType</RootNamespace>
-    <AssemblyName>DataType</AssemblyName>
+    <RootNamespace>MathMatics</RootNamespace>
+    <AssemblyName>MathMatics</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,9 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicDataType.cs" />
-    <Compile Include="StaubliRobotData.cs" />
+    <Compile Include="BasicMathTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataType\DataType.csproj">
+      <Project>{31221b5a-dc1f-4c6c-920c-bf0790babf4b}</Project>
+      <Name>DataType</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
