@@ -25,32 +25,8 @@ namespace MathMatics
             return l_vV1;
         }
 
-        /// <summary>
-        /// 判断三点共线
-        /// </summary>
-        /// <returns>true：共线</returns>false：不共线
-        public static bool ThreeColline(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3)
-        {
-            bool l_bOk = false;
-            DataType.BasicDataType.vector l_V1, l_V2;
-            l_V1 = SubVector(x_vVector1, x_vVector2);
-            l_V2 = SubVector(x_vVector2, x_vVector3);
-            if (l_V2.x * l_V1.y == l_V1.x * l_V2.y & l_V2.x * l_V1.z == l_V2.z * l_V1.x)
-            { 
-                l_bOk = true;
-            }
-            else
-            {
-                l_bOk = false;
-            }
-            return l_bOk;
-        }
+       
 
-        public static bool CreatCircle(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3, ref DataType.BasicDataType.vector x_vCenterPoint, ref double x_nRadius)
-        {
-            bool l_bOk = false;
-            l_bOk = ThreeColline(x_vVector1, x_vVector2, x_vVector3);
-            return l_bOk;
-        }
+       
     }
 }

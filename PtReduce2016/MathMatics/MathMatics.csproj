@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicMathTool.cs" />
+    <Compile Include="MatrixTool.cs" />
+    <Compile Include="PointTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
