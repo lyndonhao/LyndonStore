@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MathMatics
 {
-    public class PointTool
+    public static class PointTool
     {
         /// <summary>
         /// 判断三点共线
@@ -28,7 +28,15 @@ namespace MathMatics
             }
             return l_bOk;
         }
-
+        /// <summary>
+        /// 三点建圆
+        /// </summary>
+        /// <param name="x_vVector1"></param>
+        /// <param name="x_vVector2"></param>
+        /// <param name="x_vVector3"></param>
+        /// <param name="x_vCenterPoint"></param>圆心
+        /// <param name="x_nRadius"></param>半径
+        /// <returns></returns>
         public static bool CreatCircle(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3, out DataType.BasicDataType.vector x_vCenterPoint, out double x_nRadius)
         {
             x_vCenterPoint.x = 0;
@@ -71,6 +79,87 @@ namespace MathMatics
                 }
             }
             return l_bOk;
+        }
+        /// <summary>
+        ///  判断点是否在圆上
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsOnCircle(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3,DataType.BasicDataType.vector x_vVector4,double x_nPrecision)
+        {
+            bool l_bResult = false;
+            DataType.BasicDataType.vector l_vCenterPoint;
+            DataType.BasicDataType.PlaneCoefficient l_pCoefficient;
+            double l_nRadius;
+            l_bResult = CreatPlane(x_vVector1, x_vVector2, x_vVector3, out l_pCoefficient);
+            if (l_bResult == true)
+            {
+                l_bResult = IsOnPlane(x_vVector4, l_pCoefficient, x_nPrecision);
+                if (l_bResult == true)
+                {
+                    l_bResult = CreatCircle(x_vVector1, x_vVector2, x_vVector3, out l_vCenterPoint, out l_nRadius);
+                    double l_nDistance = BasicMathTool.VectorDistance(l_vCenterPoint, x_vVector4);
+                    if (Math.Abs(l_nDistance - l_nRadius) <= x_nPrecision)
+                    {
+                        l_bResult = true;
+                    }
+                    else
+                    {
+                        l_bResult = false;
+                    }
+                }
+            } 
+            return l_bResult;
+        }
+        /// <summary>
+        /// 三点建立平面 test success
+        /// </summary>
+        /// <param name="x_vVector1"></param>
+        /// <param name="x_vVector2"></param>
+        /// <param name="x_vVector3"></param>
+        /// <param name="x_pPlaneCoefficient"></param>
+        /// <returns>false 三点共线
+        /// </returns>true 成功
+        public static bool CreatPlane(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3,out DataType.BasicDataType.PlaneCoefficient x_pPlaneCoefficient)
+        {
+            x_pPlaneCoefficient.a = 0;
+            x_pPlaneCoefficient.b = 0;
+            x_pPlaneCoefficient.c = 0;
+            x_pPlaneCoefficient.d = 0;
+            bool l_bResule = false;
+            l_bResule = ThreeColline(x_vVector1, x_vVector2, x_vVector3);
+            if (l_bResule == false)
+            {
+                DataType.BasicDataType.vector l_vVector1 = BasicMathTool.SubVector(x_vVector1, x_vVector2);
+                DataType.BasicDataType.vector l_vVector2 = BasicMathTool.SubVector(x_vVector1, x_vVector3);
+                DataType.BasicDataType.vector l_vVector3 = BasicMathTool.Vect3CrossPord(l_vVector1, l_vVector2);
+                x_pPlaneCoefficient.a = l_vVector3.x;
+                x_pPlaneCoefficient.b = l_vVector3.y;
+                x_pPlaneCoefficient.c = l_vVector3.z;
+                x_pPlaneCoefficient.d = -x_pPlaneCoefficient.a * x_vVector1.x - x_pPlaneCoefficient.b * x_vVector1.y - x_pPlaneCoefficient.c * x_vVector1.z;
+                l_bResule = true;
+            }
+            return l_bResule;
+        }
+        /// <summary>
+        /// 判断点是否在平面上 test success
+        /// </summary>
+        /// <param name="x_vVector"></param>
+        /// <param name="x_pPlaneCoefficient"></param>
+        /// <param name="x_nPrecision"></param>
+        /// <returns></returns>
+        public static bool IsOnPlane(DataType.BasicDataType.vector x_vVector,DataType.BasicDataType.PlaneCoefficient x_pPlaneCoefficient,double x_nPrecision)
+        {
+            bool l_bResult = false;
+            double l_nValue = x_pPlaneCoefficient.a * x_vVector.x + x_pPlaneCoefficient.b * x_vVector.y + x_pPlaneCoefficient.c * x_vVector.z + x_pPlaneCoefficient.d;
+            if (l_nValue <= x_nPrecision)
+            {
+                l_bResult = true;
+            }
+            else
+            {
+                l_bResult = false;
+            }
+            return l_bResult;
         }
     }
 }
