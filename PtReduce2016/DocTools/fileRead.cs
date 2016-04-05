@@ -7,10 +7,10 @@ using System.IO;
 
 namespace FileTools
 {
-    class fileRead
+   public class fileRead
     {
         /// <summary>
-        /// 读取txt文件，将txt中的每行保存到string数组中。
+        /// 读取txt文件，将txt中的每行保存到string数组中。test success
         /// </summary>
         /// <param name="x_sPath"></param>
         /// <returns></returns>
@@ -18,16 +18,16 @@ namespace FileTools
         {
             string l_sLine=string.Empty;
             StreamReader SR = new StreamReader(x_sPath,Encoding.Default);
-            string[] l_sFileInfor = new string[5000];
-
-            int i = 0;
-
-
+            //string[] l_sFileInfor = new string[5000];
+            List<string> l_arraylist = new List<string>();
+            //int i = 0;
             while ((l_sLine = SR.ReadLine()) != null)
             {
-                l_sFileInfor[i] = l_sLine.ToString();
-                i++;
+                l_arraylist.Add(l_sLine.ToString());
+                //l_sFileInfor[i] = l_sLine.ToString();
+                //i++;
             }
+            string[] l_sFileInfor = l_arraylist.ToArray();
             return l_sFileInfor;
 
         }

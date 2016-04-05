@@ -13,3 +13,5 @@ C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtRedu
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\DataType.pdb
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\MathMatics.dll
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\MathMatics.pdb
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\DocTools.dll
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\bin\Debug\DocTools.pdb
