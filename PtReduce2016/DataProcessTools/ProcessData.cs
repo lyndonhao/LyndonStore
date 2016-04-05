@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataProcessTools
 {
-    class ProcessData
+    public class ProcessData
     {
         
     }

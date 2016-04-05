@@ -46,27 +46,48 @@ namespace PtReduce2016
             matrix_a[2, 0] = 9;
             matrix_a[2, 1] = 8;
             matrix_a[2, 2] = 3;
-            DataType.BasicDataType.vector[] abc=new DataType.BasicDataType.vector[4];
-            double r=new double();
-            abc[0].x=1;
-            abc[0].y=2;
-            abc[0].z=3;
+            DataType.BasicDataType.vector l_v1,l_v2,l_v3,l_v4;
+            DataType.BasicDataType.PlaneCoefficient abc;
+            l_v1.x=1;
+            l_v1.y=2;
+            l_v1.z=3;
+            l_v2.x=5;
+            l_v2.y=6;
+            l_v2.z=7;
+            l_v3.x=9;
+            l_v3.y=8;
+            l_v3.z=3;
+            l_v4.x = 3;
+            l_v4.y = 8;
+            l_v4.z = 9;
+            bool l_bResult = PointTool.CreatPlane(l_v1, l_v2, l_v3, out abc);
+            l_bResult = PointTool.IsOnCircle(l_v1, l_v2, l_v3, l_v3, 0.01);
+            l_bResult = PointTool.IsOnCircle(l_v1, l_v2, l_v3, l_v4, 0.01);
+            l_bResult = PointTool.IsOnPlane(l_v1, abc,0);
+            l_bResult = PointTool.IsOnPlane(l_v2, abc, 0);
+            l_bResult = PointTool.IsOnPlane(l_v3, abc, 0);
+            l_bResult = PointTool.IsOnPlane(l_v4, abc, 0);
+            //DataType.BasicDataType.vector[] abc=new DataType.BasicDataType.vector[4];
+            //double r=new double();
+            //abc[0].x=1;
+            //abc[0].y=2;
+            //abc[0].z=3;
 
-            abc[1].x=5;
-            abc[1].y=6;
-            abc[1].z=7;
+            //abc[1].x=5;
+            //abc[1].y=6;
+            //abc[1].z=7;
 
-            abc[2].x=9;
-            abc[2].y=8;
-            abc[2].z=3;
+            //abc[2].x=9;
+            //abc[2].y=8;
+            //abc[2].z=3;
 
 
-            l_bOk = PointTool.CreatCircle(abc[0], abc[1], abc[2],out abc[3],out r);
+            //l_bOk = PointTool.CreatCircle(abc[0], abc[1], abc[2],out abc[3],out r);
 
-            double[,] matrix_b=new double[3,3];
-            double c=MatrixTool.MatrixSurplus(matrix_a);
-            l_bOk = MatrixTool.MatrixInverse(matrix_a,ref matrix_b);
-            matrix_b = MatrixTool.MatrixTranspose(matrix_a);
+            //double[,] matrix_b=new double[3,3];
+            //double c=MatrixTool.MatrixSurplus(matrix_a);
+            //l_bOk = MatrixTool.MatrixInverse(matrix_a,ref matrix_b);
+            //matrix_b = MatrixTool.MatrixTranspose(matrix_a);
             
             //int[] n=new 
             //ArrayList dsd =  new ArrayList();

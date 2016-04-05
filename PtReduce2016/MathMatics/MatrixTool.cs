@@ -8,6 +8,7 @@ namespace MathMatics
 {
     public static class MatrixTool
     {
+
         public static bool MatrixDotMultiply(double[,] x_arrayLeft, double[] x_arrayRight, out double[] x_arrayOut)
         {
             bool _bok = false;
@@ -24,7 +25,7 @@ namespace MathMatics
                         _resultValue[i] += x_arrayLeft[i, j] * x_arrayRight[j];
                     }
                     
-                    
+                  // PointTool.IsOnCircle() 
                 }
                 x_arrayOut = _resultValue;
                 _bok = true;
