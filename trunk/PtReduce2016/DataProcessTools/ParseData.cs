@@ -9,22 +9,45 @@ using DataType;
 
 namespace DataProcessTools
 {
-    public class ParseData
+    public  class ParseData
     {
         /// <summary>
-        /// 查找标识符在字符串中起始位置后首次出现的位置 test success
+        /// 查找标识符在单个字符串中起始位置后首次出现的位置 test success
         /// </summary>
         /// <param name="x_sIdentification"></param>
         /// <param name="x_sTargetString"></param>
         /// <param name="x_nPosition"></param>字符串所在位置
         /// <returns>true:包含字符串
         /// </returns>false：不包含字符串
-        public static bool FindString(string x_sIdentification,string x_sTargetString,ref List<int> x_nPosition,int x_nStartIndex)
+        public  bool FindString(string x_sIdentification,string x_sTargetString,ref int x_nPosition,int x_nStartIndex)
         {
             bool l_bResult = false;
             int i = x_sTargetString.IndexOf(x_sIdentification,x_nStartIndex);
-            if (i < 0) { l_bResult = false; } else { l_bResult = true; x_nPosition.Add(i); }
+            if (i < 0) { l_bResult = false; x_nPosition = -1; } else { l_bResult = true; x_nPosition = i; }
             return l_bResult;
+        }
+        /// <summary>
+        /// 查找标识符在字符串数组中的所有位置。
+        /// </summary>
+        /// <param name="x_sIdentification"></param>
+        /// <param name="x_sTargetString"></param>
+        /// <param name="x_nPosition"></param>
+        /// <param name="x_nStartIndex"></param>
+        /// <returns></returns>
+        public  bool FindString(string x_sIdentification, string[] x_sTargetString, ref int[] x_nIndex)
+        {
+            bool l_bResult = false;
+            int l_nPosition = new int();
+            //List<int> l_nPosition=new List<int>();
+            List<int> l_ListIndex = new List<int>();
+            for (int i=0;i<=x_sTargetString.Length-1;i++)
+            {
+                l_bResult = FindString(x_sIdentification, x_sTargetString[i], ref l_nPosition, 0);
+                if (l_bResult == true) { l_ListIndex.Add(l_nPosition); }
+            }
+            if (l_ListIndex.Count == 0) { l_bResult = false; } else { x_nIndex=l_ListIndex.ToArray; l_bResult = true; }
+            return l_bResult;
+            
         }
         /// <summary>
         /// 查找标识符在字符串中的所有位置 test success
@@ -33,7 +56,7 @@ namespace DataProcessTools
         /// <param name="x_sTargetString"></param>
         /// <param name="x_nPosition"></param>
         /// <returns></returns>
-        public static bool FindString(string x_sIdentification, string x_sTargetString, ref List<int> x_nPosition)
+        public  bool FindString(string x_sIdentification, string x_sTargetString, ref List<int> x_nPosition)
         {
             bool l_bResult = true;
             int i = x_sTargetString.IndexOf(x_sIdentification, 0);
@@ -64,7 +87,7 @@ namespace DataProcessTools
         /// <param name="x_sPoint"></param>
         /// <param name="x_pPoint"></param>
         /// <returns></returns>
-        public static bool String2Point(string[] x_sPoint,ref DataType.StaubliRobotData.St_PointRx x_pPoint)
+        public  bool String2Point(string[] x_sPoint,ref DataType.StaubliRobotData.St_PointRx x_pPoint)
         {
             bool l_bOk = false;
             if (x_sPoint.Length != 6)
@@ -92,8 +115,9 @@ namespace DataProcessTools
         /// <param name="x_sTargetString"></param>
         /// <param name="x_pPoint"></param>
         /// <returns></returns>
-        public static bool getPoint(string x_sIdentifier1,char x_sIdentifier2,string x_sTargetString,DataType.StaubliRobotData.St_PointRx x_pPoint)
+        public  bool getPoint(string x_sIdentifier1,char x_sIdentifier2,string x_sTargetString,ref DataType.StaubliRobotData.St_PointRx x_pPoint)
         {
+            
             bool l_bOk = false;
             List<int> l_nPosition=new List<int>();
             l_bOk=FindString(x_sIdentifier1,x_sTargetString,ref l_nPosition);
@@ -113,29 +137,29 @@ namespace DataProcessTools
             }
             return l_bOk;
         }
-        //public static
         /// <summary>
-        /// 查找字符串
+        /// 获取字符串数组中所有的点。test success
         /// </summary>
-        /// <param name="x_sIdentification"></param>
+        /// <param name="x_sIdentifier1"></param>
+        /// <param name="x_sIdentifier2"></param>
         /// <param name="x_sTargetString"></param>
+        /// <param name="x_nStartIndex"></param>
+        /// <param name="x_nEndIndex"></param>
+        /// <param name="x_ListPoint"></param>
         /// <returns></returns>
-        //public bool FindString(string x_sIdentification, string x_sTargetString)
-        //{
-        //    bool l_bResult = false;
-        //    int i=0;
-        //    l_bResult = FindString(x_sIdentification, x_sTargetString, ref i);
-        //    return l_bResult;
-        //}
-        //public void getPoint(ref DataType.StaubliRobotData.St_PointRx x_pPoint,ref DataType.StaubliRobotData.St_JointRx x_jJoint,string x_sTargetString,char x_sIdentifer1,char x_sIdentifer2)
-        //{
-        //    string[] l_sString = x_sTargetString.Split(new char[2] { x_sIdentifer1, x_sIdentifer2 });
-        //    x_jJoint.J1 = int.Parse(l_sString[1]);
-        //    x_jJoint.J1 = int.Parse(l_sString[1]);
-        //    x_jJoint.J1 = int.Parse(l_sString[1]);
-        //    x_jJoint.J1 = int.Parse(l_sString[1]);
-        //    x_jJoint.J1 = int.Parse(l_sString[1]);
-        //    x_jJoint.J1 = int.Parse(l_sString[1]);
-        //}
+        public  bool getPoint(string x_sIdentifier1,char x_sIdentifier2,string[] x_sTargetString,int x_nStartIndex,int x_nEndIndex,out List<DataType.StaubliRobotData.St_PointRx> x_ListPoint)
+        {
+            bool l_bResult = false;
+            x_ListPoint=null;
+            List<DataType.StaubliRobotData.St_PointRx> l_arrayList = new List<DataType.StaubliRobotData.St_PointRx>();
+            DataType.StaubliRobotData.St_PointRx l_pPoint=new DataType.StaubliRobotData.St_PointRx();
+            for (int i = x_nStartIndex + 1; i <= x_nEndIndex - 1; i++)
+            {
+                l_bResult = getPoint(x_sIdentifier1, x_sIdentifier2, x_sTargetString[i],ref l_pPoint);
+                if (l_bResult == true) { l_arrayList.Add(l_pPoint); }
+            }
+            if (l_arrayList.Count == 0) { l_bResult = false; } else { x_ListPoint = l_arrayList; l_bResult = true; }
+            return l_bResult;
+        }
     }
 }

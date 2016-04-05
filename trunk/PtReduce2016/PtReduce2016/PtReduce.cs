@@ -33,7 +33,7 @@ namespace PtReduce2016
             DataProcessTools.ParseData a = new DataProcessTools.ParseData();
             string b="MOVEJ/-102.709,82.550,-54.028,140.990,112.893,-17.491/-60.284,-10.000,1.000,180.000,0.000,-50.501/";
             DataType.StaubliRobotData.St_PointRx pPoint=new DataType.StaubliRobotData.St_PointRx();
-            bool l_bOk=DataProcessTools.ParseData.getPoint("/",',',b,pPoint);
+           // bool l_bOk=DataProcessTools.ParseData.getPoint("/",',',b,ref pPoint);
 
 
             double[,] matrix_a = new double[3, 3];
@@ -67,6 +67,8 @@ namespace PtReduce2016
             l_bResult = PointTool.IsOnPlane(l_v2, abc, 0);
             l_bResult = PointTool.IsOnPlane(l_v3, abc, 0);
             l_bResult = PointTool.IsOnPlane(l_v4, abc, 0);
+
+
             //DataType.BasicDataType.vector[] abc=new DataType.BasicDataType.vector[4];
             //double r=new double();
             //abc[0].x=1;
@@ -95,6 +97,41 @@ namespace PtReduce2016
            // List<string> ddd= new List<string>;
             //List<int> n = new List<int>();
            // bool c=a.FindString("/",b,ref n);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //string l_logPath = string.Empty;
+            //FileTools.fileRead a = new FileTools.fileRead();
+            //OpenFileDialog ofd = new OpenFileDialog();
+            //List<int> l_ListIndex=new List<int>();
+            //if (ofd.ShowDialog() == DialogResult.OK || ofd.ShowDialog() == DialogResult.Yes)
+            //{
+            //    l_logPath = ofd.FileName;
+            //    string[] l_s = a.ReadTxt(l_logPath);
+            //    bool l_bResult = ParseData.FindString("LaserON", l_s, ref l_ListIndex);
+            //    int l_nstart = l_ListIndex[0];
+            //    l_bResult = ParseData.FindString("LaserOFF", l_s, ref l_ListIndex);
+            //    int l_nend = l_ListIndex[0];
+            //    List<DataType.StaubliRobotData.St_PointRx> l_arrayList = new List<DataType.StaubliRobotData.St_PointRx>();
+            //    l_bResult = ParseData.getPoint("/", ',', l_s, l_nstart, l_nend, out l_arrayList);
+                //l_logPath = ofd.;
+                //string[] l_s = a.ReadTxt(l_logPath);
+                //this.richTextBox1.Text = LogPath + "\n";//在textBox1控件中显示选择的路径
+            //}
+            //string l_logPath=string.Empty;
+            //FileTools.fileRead a=new FileTools.fileRead();
+            //FolderBrowserDialog dilog = new FolderBrowserDialog();
+            //dilog.Description = "请选择文件夹";
+            //if (dilog.ShowDialog() == DialogResult.OK || dilog.ShowDialog() == DialogResult.Yes)
+            //{
+            //     l_logPath = dilog.SelectedPath;
+            //     string[] l_s = a.ReadTxt(l_logPath);
+            //    //this.richTextBox1.Text = LogPath + "\n";//在textBox1控件中显示选择的路径
+            //}
+            
+
+
         }
     }
 }
