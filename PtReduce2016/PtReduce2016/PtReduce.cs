@@ -101,32 +101,37 @@ namespace PtReduce2016
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //string l_logPath = string.Empty;
-            //FileTools.fileRead a = new FileTools.fileRead();
-            //OpenFileDialog ofd = new OpenFileDialog();
-            //List<int> l_ListIndex=new List<int>();
-            //if (ofd.ShowDialog() == DialogResult.OK || ofd.ShowDialog() == DialogResult.Yes)
-            //{
-            //    l_logPath = ofd.FileName;
-            //    string[] l_s = a.ReadTxt(l_logPath);
-            //    bool l_bResult = ParseData.FindString("LaserON", l_s, ref l_ListIndex);
-            //    int l_nstart = l_ListIndex[0];
-            //    l_bResult = ParseData.FindString("LaserOFF", l_s, ref l_ListIndex);
-            //    int l_nend = l_ListIndex[0];
-            //    List<DataType.StaubliRobotData.St_PointRx> l_arrayList = new List<DataType.StaubliRobotData.St_PointRx>();
-            //    l_bResult = ParseData.getPoint("/", ',', l_s, l_nstart, l_nend, out l_arrayList);
+            ProcessData b=new ProcessData();
+           // bool l_bResult=a.PtReduce("/",',',)
+            string l_logPath = string.Empty;
+            FileTools.fileRead a = new FileTools.fileRead();
+            OpenFileDialog ofd = new OpenFileDialog();
+            List<int> l_ListIndex=new List<int>();
+            if (ofd.ShowDialog() == DialogResult.OK || ofd.ShowDialog() == DialogResult.Yes)
+            {
+                l_logPath = ofd.FileName;
+                string[] l_s = a.ReadTxt(l_logPath);
+                List<DataType.StaubliRobotData.St_PointRx> l_ListPoint = b.PtReduce("/", ',', l_s);
+                //bool l_bResult = ParseData.FindString("LaserON", l_s, ref l_ListIndex);
+                //int l_nstart = l_ListIndex[0];
+                //l_bResult = ParseData.FindString("LaserOFF", l_s, ref l_ListIndex);
+                //int l_nend = l_ListIndex[0];
+                //List<DataType.StaubliRobotData.St_PointRx> l_arrayList = new List<DataType.StaubliRobotData.St_PointRx>();
+                //l_bResult = ParseData.getPoint("/", ',', l_s, l_nstart, l_nend, out l_arrayList);
                 //l_logPath = ofd.;
                 //string[] l_s = a.ReadTxt(l_logPath);
                 //this.richTextBox1.Text = LogPath + "\n";//在textBox1控件中显示选择的路径
-            //}
+            }
             //string l_logPath=string.Empty;
             //FileTools.fileRead a=new FileTools.fileRead();
+            //ProcessData b=new ProcessData();
             //FolderBrowserDialog dilog = new FolderBrowserDialog();
             //dilog.Description = "请选择文件夹";
             //if (dilog.ShowDialog() == DialogResult.OK || dilog.ShowDialog() == DialogResult.Yes)
             //{
             //     l_logPath = dilog.SelectedPath;
             //     string[] l_s = a.ReadTxt(l_logPath);
+            //     List<DataType.StaubliRobotData.St_PointRx> l_ListPoint = b.PtReduce("/", ',', l_s);
             //    //this.richTextBox1.Text = LogPath + "\n";//在textBox1控件中显示选择的路径
             //}
             

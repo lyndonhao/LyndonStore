@@ -8,6 +8,14 @@ namespace MathMatics
 {
     public static class PointTool
     {
+        public static DataType.BasicDataType.vector Point2Vector(DataType.StaubliRobotData.St_PointRx x_pPoint)
+        {
+            DataType.BasicDataType.vector l_v;
+            l_v.x = x_pPoint.x;
+            l_v.y = x_pPoint.y;
+            l_v.z = x_pPoint.z;
+            return l_v;
+        }
         /// <summary>
         /// 判断三点共线
         /// </summary>
@@ -27,6 +35,16 @@ namespace MathMatics
                 l_bOk = false;
             }
             return l_bOk;
+        }
+        public static bool ThreeColline(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3)
+        {
+            bool l_bResult = false;
+            DataType.BasicDataType.vector l_V1, l_V2, l_V3;
+            l_V1 = Point2Vector(x_pPoint1);
+            l_V2 = Point2Vector(x_pPoint2);
+            l_V3 = Point2Vector(x_pPoint3);
+            l_bResult = ThreeColline(l_V1, l_V2, l_V3);
+            return l_bResult;
         }
         /// <summary>
         /// 三点建圆
@@ -79,6 +97,21 @@ namespace MathMatics
                 }
             }
             return l_bOk;
+        }
+        /// <summary>
+        ///  判断点是否在圆上
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsOnCircle(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, DataType.StaubliRobotData.St_PointRx x_pPoint4, double x_nPrecision)
+        {
+            bool l_bResult = false;
+            DataType.BasicDataType.vector l_v1, l_v2, l_v3,l_v4;
+            l_v1 = Point2Vector(x_pPoint1);
+            l_v2 = Point2Vector(x_pPoint2);
+            l_v3 = Point2Vector(x_pPoint3);
+            l_v4 = Point2Vector(x_pPoint4);
+            l_bResult = IsOnCircle(l_v1, l_v2, l_v3, l_v4, x_nPrecision);
+            return l_bResult;
         }
         /// <summary>
         ///  判断点是否在圆上

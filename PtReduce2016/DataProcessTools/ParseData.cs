@@ -19,11 +19,11 @@ namespace DataProcessTools
         /// <param name="x_nPosition"></param>字符串所在位置
         /// <returns>true:包含字符串
         /// </returns>false：不包含字符串
-        public  bool FindString(string x_sIdentification,string x_sTargetString,ref int x_nPosition,int x_nStartIndex)
+        public  bool FindString(string x_sIdentification,string x_sTargetString,ref List<int> x_nPosition,int x_nStartIndex)
         {
             bool l_bResult = false;
             int i = x_sTargetString.IndexOf(x_sIdentification,x_nStartIndex);
-            if (i < 0) { l_bResult = false; x_nPosition = -1; } else { l_bResult = true; x_nPosition = i; }
+            if (i < 0) { l_bResult = false; } else { l_bResult = true; x_nPosition.Add(i); }
             return l_bResult;
         }
         /// <summary>
@@ -34,20 +34,19 @@ namespace DataProcessTools
         /// <param name="x_nPosition"></param>
         /// <param name="x_nStartIndex"></param>
         /// <returns></returns>
-        public  bool FindString(string x_sIdentification, string[] x_sTargetString, ref int[] x_nIndex)
+        public  bool FindString(string x_sIdentification, string[] x_sTargetString, ref List<int> x_nIndex)
         {
             bool l_bResult = false;
-            int l_nPosition = new int();
-            //List<int> l_nPosition=new List<int>();
+            //int l_nPosition = new int();
+            List<int> l_nPosition=new List<int>();
             List<int> l_ListIndex = new List<int>();
             for (int i=0;i<=x_sTargetString.Length-1;i++)
             {
                 l_bResult = FindString(x_sIdentification, x_sTargetString[i], ref l_nPosition, 0);
-                if (l_bResult == true) { l_ListIndex.Add(l_nPosition); }
+                if (l_bResult == true) { l_ListIndex.Add(i); }
             }
-            if (l_ListIndex.Count == 0) { l_bResult = false; } else { x_nIndex=l_ListIndex.ToArray; l_bResult = true; }
-            return l_bResult;
-            
+            if (l_ListIndex.Count == 0) { l_bResult = false; } else { x_nIndex=l_ListIndex; l_bResult = true; }
+            return l_bResult;   
         }
         /// <summary>
         /// 查找标识符在字符串中的所有位置 test success
@@ -138,7 +137,7 @@ namespace DataProcessTools
             return l_bOk;
         }
         /// <summary>
-        /// 获取字符串数组中所有的点。test success
+        /// 给定起始和结束数组索引,获取字符串数组中从开始索引到结束索引下的所有点。test success
         /// </summary>
         /// <param name="x_sIdentifier1"></param>
         /// <param name="x_sIdentifier2"></param>
@@ -159,6 +158,35 @@ namespace DataProcessTools
                 if (l_bResult == true) { l_arrayList.Add(l_pPoint); }
             }
             if (l_arrayList.Count == 0) { l_bResult = false; } else { x_ListPoint = l_arrayList; l_bResult = true; }
+            return l_bResult;
+        }
+        /// <summary>
+        /// 获取从开始字符串到结束字符串下所有的点。
+        /// </summary>
+        /// <param name="x_sIdentifier1"></param>标识符
+        /// <param name="x_sIdentifier2"></param>
+        /// <param name="x_sTargetString"></param>目标字符串
+        /// <param name="x_sStartString"></param>开始字符串
+        /// <param name="x_sEndString"></param>结束字符串
+        /// <param name="x_ListPoint"></param>
+        /// <returns></returns>
+        public bool getPoint(string x_sIdentifier1, char x_sIdentifier2, string[] x_sTargetString, string x_sStartString, string x_sEndString, out List<DataType.StaubliRobotData.St_PointRx> x_ListPoint)
+        {
+            x_ListPoint = null;
+            //ParseData ParseTool = new ParseData();
+            List<DataType.StaubliRobotData.St_PointRx> l_ListPoint = new List<DataType.StaubliRobotData.St_PointRx>();
+            List<int> l_ListIndex1 = new List<int>();
+            List<int> l_ListIndex2 = new List<int>();
+            bool l_bResult = false;
+            bool l_bResult1 = FindString(x_sStartString, x_sTargetString, ref l_ListIndex1);
+            bool l_bResult2 = FindString(x_sEndString, x_sTargetString, ref l_ListIndex2);
+            if (l_bResult1 == true & l_bResult2 == true)
+            {
+                int l_nStartIndex = l_ListIndex1[0];
+                int l_nEndIndex = l_ListIndex2[0];
+                l_bResult = getPoint(x_sIdentifier1, x_sIdentifier2, x_sTargetString, l_nStartIndex, l_nEndIndex, out l_ListPoint);      
+            }
+
             return l_bResult;
         }
     }
