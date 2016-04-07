@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using System.IO;
 
 namespace FileTools
@@ -18,7 +19,6 @@ namespace FileTools
         {
             string l_sLine=string.Empty;
             StreamReader SR = new StreamReader(x_sPath,Encoding.Default);
-            //string[] l_sFileInfor = new string[5000];
             List<string> l_arraylist = new List<string>();
             //int i = 0;
             while ((l_sLine = SR.ReadLine()) != null)
