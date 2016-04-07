@@ -105,17 +105,67 @@ namespace PtReduce2016
            // bool l_bResult=a.PtReduce("/",',',)
             string l_logPath = string.Empty;
             FileTools.fileRead a = new FileTools.fileRead();
+            FileTools.fileWrite d = new FileTools.fileWrite();
             ParseData c=new ParseData();
             OpenFileDialog ofd = new OpenFileDialog();
             List<int> l_ListIndex=new List<int>();
             List<DataType.StaubliRobotData.St_PointRx> l_ListPoint=new List<StaubliRobotData.St_PointRx>();
+            List<DataType.StaubliRobotData.St_JointRx> l_ListJoint = new List<StaubliRobotData.St_JointRx>();
             List<DataType.StaubliRobotData.St_PointRx> l_ListPoint1 = new List<StaubliRobotData.St_PointRx>();
+
+            DataType.StaubliRobotData.St_JointRx l_jJoint = new StaubliRobotData.St_JointRx();
+            DataType.StaubliRobotData.St_PointRx l_pPoint = new DataType.StaubliRobotData.St_PointRx();
+
+            l_jJoint.J1 = 90;
+            l_jJoint.J2 = 30;
+            l_jJoint.J3 = 30;
+            l_jJoint.J4 = 30;
+            l_jJoint.J5 = 30;
+            l_jJoint.J6 = 30;
+
+            l_pPoint.x = 10;
+            l_pPoint.y = 10;
+            l_pPoint.z = 10;
+            l_pPoint.Rx = 10;
+            l_pPoint.Ry = 10;
+            l_pPoint.Rz = 10;
+
             if (ofd.ShowDialog() == DialogResult.OK || ofd.ShowDialog() == DialogResult.Yes)
             {
                l_logPath = ofd.FileName;
+                //读取文件
                string[] l_s = a.ReadTxt(l_logPath);
+                //获取点
+               string[] l_s1 = c.StringEmpty(l_s, 44, 88);
                bool l_bResult = c.getPoint("/", ',', l_s, "LaserON", "LaserOFF", out l_ListPoint);
-               l_ListPoint1 = b.PtReduce(0.008,0.008, l_ListPoint,out l_ListIndex);
+                //缩减点
+               //l_ListPoint1 = b.PtReduce(0.008,0.008, l_ListPoint,out l_ListIndex);
+               string l_sString = c.Trans2Standard(l_jJoint, l_pPoint, "/",",");
+                //输出txt文件
+               try
+            {
+                string name = "aa";  //文件名
+                string content = "bb";  //文件内容
+                string path = string.Empty;  //文件路径
+                SaveFileDialog save = new SaveFileDialog();
+                if (save.ShowDialog() == DialogResult.OK)
+                    path = save.FileName;
+                if (path != string.Empty)
+                {
+                    using (System.IO.FileStream file = new System.IO.FileStream(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+                    {
+                        using (System.IO.TextWriter text = new System.IO.StreamWriter(file, System.Text.Encoding.Default))
+                        {
+                            text.Write(content);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        
                 //bool l_bResult = ParseData.FindString("LaserON", l_s, ref l_ListIndex);
                 //int l_nstart = l_ListIndex[0];
                 //l_bResult = ParseData.FindString("LaserOFF", l_s, ref l_ListIndex);

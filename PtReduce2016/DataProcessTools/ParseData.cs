@@ -12,6 +12,25 @@ namespace DataProcessTools
     public  class ParseData
     {
         /// <summary>
+        /// 查找在x_ListInt是否有值等于x_nInputInt
+        /// </summary>
+        /// <param name="x_nInputInt"></param>
+        /// <param name="x_ListInt"></param>
+        /// <returns></returns>
+        public bool FindInt(int x_nInputInt, List<int> x_ListInt)
+        {
+            bool l_bResult = false;
+            for (int i = 0; i <= x_ListInt.Count-1; i++)
+            {
+                if (x_nInputInt == x_ListInt[i])
+                {
+                    l_bResult = true;
+                    break;
+                }
+            }
+            return l_bResult;
+        }
+        /// <summary>
         /// 查找标识符在单个字符串中起始位置后首次出现的位置 test success
         /// </summary>
         /// <param name="x_sIdentification"></param>
@@ -104,7 +123,151 @@ namespace DataProcessTools
                 l_bOk = true;
             }
             return l_bOk;
- 
+        }
+
+        public bool String2Joint(string[] x_sJoint, ref DataType.StaubliRobotData.St_JointRx x_jJoint)
+        {
+            bool l_bOk = false;
+            if (x_sJoint.Length != 6)
+            {
+                l_bOk = false;
+            }
+            else
+            {
+                x_jJoint.J1 = double.Parse(x_sJoint[0]);
+                x_jJoint.J2 = double.Parse(x_sJoint[1]);
+                x_jJoint.J3 = double.Parse(x_sJoint[2]);
+                x_jJoint.J4 = double.Parse(x_sJoint[3]);
+                x_jJoint.J5 = double.Parse(x_sJoint[4]);
+                x_jJoint.J6 = double.Parse(x_sJoint[5]);
+                l_bOk = true;
+            }
+            return l_bOk;
+        }
+        public bool Joint2Double(ref double[] x_nNumber, DataType.StaubliRobotData.St_JointRx x_jJoint)
+        {
+            bool l_bOk = false;
+            if (x_nNumber.Length != 6)
+            {
+                l_bOk = false;
+            }
+            else
+            {
+                x_nNumber[0] = x_jJoint.J1;
+                x_nNumber[1] = x_jJoint.J2;
+                x_nNumber[2] = x_jJoint.J3;
+                x_nNumber[3] = x_jJoint.J4;
+                x_nNumber[4] = x_jJoint.J5;
+                x_nNumber[5] = x_jJoint.J6;
+                l_bOk = true;
+            }
+            return l_bOk;
+        }
+        public bool Point2Double(ref double[] x_nNumber, DataType.StaubliRobotData.St_PointRx x_pPoint)
+        {
+            bool l_bOk = false;
+            if (x_nNumber.Length != 6)
+            {
+                l_bOk = false;
+            }
+            else
+            {
+                x_nNumber[0] = x_pPoint.x;
+                x_nNumber[1] = x_pPoint.y;
+                x_nNumber[2] = x_pPoint.z;
+                x_nNumber[3]=x_pPoint.Rx;
+                x_nNumber[4] = x_pPoint.Ry;
+                x_nNumber[5] = x_pPoint.Rz;
+                l_bOk = true;
+            }
+            return l_bOk;
+        }
+
+        public string Double2String(double[] x_nNumber,string x_sSeparator)
+        {
+            string l_sString = string.Empty;
+            for (int i = 0; i <= x_nNumber.Length-1; i++)
+            {
+                l_sString = l_sString + x_nNumber[i].ToString("f3")+x_sSeparator;
+            }
+            return l_sString;
+        }
+        public string Joint2String(DataType.StaubliRobotData.St_JointRx x_jJoint, string x_sSeparator)
+        {
+            string l_sString = string.Empty;
+            double[] l_nNum = new double[6];
+            bool l_bResult = Joint2Double(ref l_nNum, x_jJoint);
+            if (l_bResult == true)
+            {
+                l_sString = Double2String(l_nNum, x_sSeparator);
+            }
+            return l_sString;
+        }
+        public string Point2String(DataType.StaubliRobotData.St_PointRx x_pPoint, string x_sSeparator)
+        {
+            string l_sString = string.Empty;
+            double[] l_nNum = new double[6];
+            bool l_bResult = Point2Double(ref l_nNum, x_pPoint);
+            if (l_bResult == true)
+            {
+                l_sString = Double2String(l_nNum, x_sSeparator);
+            }
+            return l_sString;
+
+        }
+        public bool getJoint(string x_sIdentifier1, char x_sIdentifier2, string x_sTargetString, ref DataType.StaubliRobotData.St_JointRx x_jJoint)
+        {
+            bool l_bOk = false;
+            List<int> l_nPosition = new List<int>();
+            l_bOk = FindString(x_sIdentifier1, x_sTargetString, ref l_nPosition);
+            if (l_bOk == true)
+            {
+                try
+                {
+                    string l_sString = x_sTargetString.Substring(l_nPosition[0] + 1, l_nPosition[1] - l_nPosition[0] - 1);
+                    string[] l_sJoint = l_sString.Split(x_sIdentifier2);
+                    l_bOk = String2Joint(l_sJoint, ref x_jJoint);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error:getPoint exception: " + ex.Message);
+                }
+            }
+            return l_bOk;
+        }
+
+        public bool getJoint(string x_sIdentifier1, char x_sIdentifier2, string[] x_sTargetString, int x_nStartIndex, int x_nEndIndex, out List<DataType.StaubliRobotData.St_JointRx> x_ListJoint)
+        {
+            bool l_bResult = false;
+            x_ListJoint = null;
+            List<DataType.StaubliRobotData.St_JointRx> l_arrayList = new List<DataType.StaubliRobotData.St_JointRx>();
+            DataType.StaubliRobotData.St_JointRx l_jJoint = new DataType.StaubliRobotData.St_JointRx();
+            for (int i = x_nStartIndex + 1; i <= x_nEndIndex - 1; i++)
+            {
+                l_bResult = getJoint(x_sIdentifier1, x_sIdentifier2, x_sTargetString[i], ref l_jJoint);
+                if (l_bResult == true) { l_arrayList.Add(l_jJoint); }
+            }
+            if (l_arrayList.Count == 0) { l_bResult = false; } else { x_ListJoint = l_arrayList; l_bResult = true; }
+            return l_bResult;
+        }
+
+        public bool getJoint(string x_sIdentifier1, char x_sIdentifier2, string[] x_sTargetString, string x_sStartString, string x_sEndString, out List<DataType.StaubliRobotData.St_JointRx> x_ListJoint)
+        {
+            x_ListJoint = null;
+            //ParseData ParseTool = new ParseData();
+            //List<DataType.StaubliRobotData.St_PointRx> l_ListPoint = new List<DataType.StaubliRobotData.St_PointRx>();
+            List<int> l_ListIndex1 = new List<int>();
+            List<int> l_ListIndex2 = new List<int>();
+            bool l_bResult = false;
+            bool l_bResult1 = FindString(x_sStartString, x_sTargetString, ref l_ListIndex1);
+            bool l_bResult2 = FindString(x_sEndString, x_sTargetString, ref l_ListIndex2);
+            if (l_bResult1 == true & l_bResult2 == true)
+            {
+                int l_nStartIndex = l_ListIndex1[0];
+                int l_nEndIndex = l_ListIndex2[0];
+                l_bResult = getJoint(x_sIdentifier1, x_sIdentifier2, x_sTargetString, l_nStartIndex, l_nEndIndex, out x_ListJoint);
+            }
+            return l_bResult;
         }
         /// <summary>
         /// 获取点信息 test success
@@ -115,8 +278,7 @@ namespace DataProcessTools
         /// <param name="x_pPoint"></param>
         /// <returns></returns>
         public  bool getPoint(string x_sIdentifier1,char x_sIdentifier2,string x_sTargetString,ref DataType.StaubliRobotData.St_PointRx x_pPoint)
-        {
-            
+        {       
             bool l_bOk = false;
             List<int> l_nPosition=new List<int>();
             l_bOk=FindString(x_sIdentifier1,x_sTargetString,ref l_nPosition);
@@ -188,6 +350,29 @@ namespace DataProcessTools
             }
 
             return l_bResult;
+        }
+
+        public string[] StringEmpty(string[] x_sString,int x_nStartIndex,int x_nEndIndex)
+        {
+            string[] l_sString = new string[x_sString.Length];
+            l_sString = x_sString;
+            for (int i = x_nStartIndex; i <= x_nEndIndex - 1; i++)
+            {
+                l_sString[i] = string.Empty;
+            }  
+            return l_sString;
+        }
+        /// <summary>
+        /// 转换为离线文件标准字符串形式
+        /// </summary>
+        /// <returns></returns>
+        public string Trans2Standard(DataType.StaubliRobotData.St_JointRx x_jJoint,DataType.StaubliRobotData.St_PointRx x_pPoint,string x_sPropertySeparator,string x_sPointSeparator)
+        {
+            string l_sString = string.Empty;
+            string l_sJoint = Joint2String(x_jJoint, x_sPointSeparator);
+            string l_sPoint = Point2String(x_pPoint, x_sPointSeparator);
+            l_sString = "MOVEJ" + x_sPropertySeparator + l_sJoint + x_sPropertySeparator + l_sPoint + x_sPropertySeparator;
+            return l_sString;
         }
     }
 }
