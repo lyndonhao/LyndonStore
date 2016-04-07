@@ -174,7 +174,7 @@ namespace DataProcessTools
         {
             x_ListPoint = null;
             //ParseData ParseTool = new ParseData();
-            List<DataType.StaubliRobotData.St_PointRx> l_ListPoint = new List<DataType.StaubliRobotData.St_PointRx>();
+            //List<DataType.StaubliRobotData.St_PointRx> l_ListPoint = new List<DataType.StaubliRobotData.St_PointRx>();
             List<int> l_ListIndex1 = new List<int>();
             List<int> l_ListIndex2 = new List<int>();
             bool l_bResult = false;
@@ -184,7 +184,7 @@ namespace DataProcessTools
             {
                 int l_nStartIndex = l_ListIndex1[0];
                 int l_nEndIndex = l_ListIndex2[0];
-                l_bResult = getPoint(x_sIdentifier1, x_sIdentifier2, x_sTargetString, l_nStartIndex, l_nEndIndex, out l_ListPoint);      
+                l_bResult = getPoint(x_sIdentifier1, x_sIdentifier2, x_sTargetString, l_nStartIndex, l_nEndIndex, out x_ListPoint);      
             }
 
             return l_bResult;
