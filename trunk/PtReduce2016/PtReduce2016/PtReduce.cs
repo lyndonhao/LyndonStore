@@ -30,43 +30,43 @@ namespace PtReduce2016
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DataProcessTools.ParseData a = new DataProcessTools.ParseData();
-            string b="MOVEJ/-102.709,82.550,-54.028,140.990,112.893,-17.491/-60.284,-10.000,1.000,180.000,0.000,-50.501/";
-            DataType.StaubliRobotData.St_PointRx pPoint=new DataType.StaubliRobotData.St_PointRx();
-           // bool l_bOk=DataProcessTools.ParseData.getPoint("/",',',b,ref pPoint);
+           // DataProcessTools.ParseData a = new DataProcessTools.ParseData();
+           // string b="MOVEJ/-102.709,82.550,-54.028,140.990,112.893,-17.491/-60.284,-10.000,1.000,180.000,0.000,-50.501/";
+           // DataType.StaubliRobotData.St_PointRx pPoint=new DataType.StaubliRobotData.St_PointRx();
+           //// bool l_bOk=DataProcessTools.ParseData.getPoint("/",',',b,ref pPoint);
 
 
-            double[,] matrix_a = new double[3, 3];
-            matrix_a[0, 0] = 1;
-            matrix_a[0, 1] = 2;
-            matrix_a[0, 2] = 3;
-            matrix_a[1, 0] = 5;
-            matrix_a[1, 1] = 6;
-            matrix_a[1, 2] = 7;
-            matrix_a[2, 0] = 9;
-            matrix_a[2, 1] = 8;
-            matrix_a[2, 2] = 3;
-            DataType.BasicDataType.vector l_v1,l_v2,l_v3,l_v4;
-            DataType.BasicDataType.PlaneCoefficient abc;
-            l_v1.x=1;
-            l_v1.y=2;
-            l_v1.z=3;
-            l_v2.x=5;
-            l_v2.y=6;
-            l_v2.z=7;
-            l_v3.x=9;
-            l_v3.y=8;
-            l_v3.z=3;
-            l_v4.x = 3;
-            l_v4.y = 8;
-            l_v4.z = 9;
-            bool l_bResult = PointTool.CreatPlane(l_v1, l_v2, l_v3, out abc);
-            l_bResult = PointTool.IsOnCircle(l_v1, l_v2, l_v3, l_v3, 0.01);
-            l_bResult = PointTool.IsOnCircle(l_v1, l_v2, l_v3, l_v4, 0.01);
-            l_bResult = PointTool.IsOnPlane(l_v1, abc,0);
-            l_bResult = PointTool.IsOnPlane(l_v2, abc, 0);
-            l_bResult = PointTool.IsOnPlane(l_v3, abc, 0);
-            l_bResult = PointTool.IsOnPlane(l_v4, abc, 0);
+           // double[,] matrix_a = new double[3, 3];
+           // matrix_a[0, 0] = 1;
+           // matrix_a[0, 1] = 2;
+           // matrix_a[0, 2] = 3;
+           // matrix_a[1, 0] = 5;
+           // matrix_a[1, 1] = 6;
+           // matrix_a[1, 2] = 7;
+           // matrix_a[2, 0] = 9;
+           // matrix_a[2, 1] = 8;
+           // matrix_a[2, 2] = 3;
+           // DataType.BasicDataType.vector l_v1,l_v2,l_v3,l_v4;
+           // DataType.BasicDataType.PlaneCoefficient abc;
+           // l_v1.x=1;
+           // l_v1.y=2;
+           // l_v1.z=3;
+           // l_v2.x=5;
+           // l_v2.y=6;
+           // l_v2.z=7;
+           // l_v3.x=9;
+           // l_v3.y=8;
+           // l_v3.z=3;
+           // l_v4.x = 3;
+           // l_v4.y = 8;
+           // l_v4.z = 9;
+           // bool l_bResult = PointTool.CreatPlane(l_v1, l_v2, l_v3, out abc);
+           // l_bResult = PointTool.IsOnCircle(l_v1, l_v2, l_v3, l_v3, 0.01);
+           // l_bResult = PointTool.IsOnCircle(l_v1, l_v2, l_v3, l_v4, 0.01);
+           // l_bResult = PointTool.IsOnPlane(l_v1, abc,0);
+           // l_bResult = PointTool.IsOnPlane(l_v2, abc, 0);
+           // l_bResult = PointTool.IsOnPlane(l_v3, abc, 0);
+           // l_bResult = PointTool.IsOnPlane(l_v4, abc, 0);
 
 
             //DataType.BasicDataType.vector[] abc=new DataType.BasicDataType.vector[4];
@@ -115,7 +115,7 @@ namespace PtReduce2016
                l_logPath = ofd.FileName;
                string[] l_s = a.ReadTxt(l_logPath);
                bool l_bResult = c.getPoint("/", ',', l_s, "LaserON", "LaserOFF", out l_ListPoint);
-               l_ListPoint1 = b.PtReduce(100, l_ListPoint,out l_ListIndex);
+               l_ListPoint1 = b.PtReduce(0.008,0.008, l_ListPoint,out l_ListIndex);
                 //bool l_bResult = ParseData.FindString("LaserON", l_s, ref l_ListIndex);
                 //int l_nstart = l_ListIndex[0];
                 //l_bResult = ParseData.FindString("LaserOFF", l_s, ref l_ListIndex);

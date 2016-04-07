@@ -102,7 +102,7 @@ namespace MathMatics
         ///  判断点是否在圆上
         /// </summary>
         /// <returns></returns>
-        public static bool IsOnCircle(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, DataType.StaubliRobotData.St_PointRx x_pPoint4, double x_nPrecision)
+        public static bool IsOnCircle(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, DataType.StaubliRobotData.St_PointRx x_pPoint4, double x_nLinePrecision, double x_nPrecision)
         {
             bool l_bResult = false;
             DataType.BasicDataType.vector l_v1, l_v2, l_v3,l_v4;
@@ -110,20 +110,20 @@ namespace MathMatics
             l_v2 = Point2Vector(x_pPoint2);
             l_v3 = Point2Vector(x_pPoint3);
             l_v4 = Point2Vector(x_pPoint4);
-            l_bResult = IsOnCircle(l_v1, l_v2, l_v3, l_v4, x_nPrecision);
+            l_bResult = IsOnCircle(l_v1, l_v2, l_v3, l_v4,x_nLinePrecision ,x_nPrecision);
             return l_bResult;
         }
         /// <summary>
         ///  判断点是否在圆上
         /// </summary>
         /// <returns></returns>
-        public static bool IsOnCircle(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3,DataType.BasicDataType.vector x_vVector4,double x_nPrecision)
+        public static bool IsOnCircle(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3,DataType.BasicDataType.vector x_vVector4,double x_nLinePrecision,double x_nPrecision)
         {
             bool l_bResult = false;
             DataType.BasicDataType.vector l_vCenterPoint;
             DataType.BasicDataType.PlaneCoefficient l_pCoefficient;
             double l_nRadius;
-            l_bResult = CreatPlane(x_vVector1, x_vVector2, x_vVector3, out l_pCoefficient);
+            l_bResult = CreatPlane(x_vVector1, x_vVector2, x_vVector3,x_nLinePrecision, out l_pCoefficient);
             if (l_bResult == true)
             {
                 l_bResult = IsOnPlane(x_vVector4, l_pCoefficient, x_nPrecision);
@@ -152,14 +152,14 @@ namespace MathMatics
         /// <param name="x_pPlaneCoefficient"></param>
         /// <returns>false 三点共线
         /// </returns>true 成功
-        public static bool CreatPlane(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3,out DataType.BasicDataType.PlaneCoefficient x_pPlaneCoefficient)
+        public static bool CreatPlane(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3,double x_nLinePrecision,out DataType.BasicDataType.PlaneCoefficient x_pPlaneCoefficient)
         {
             x_pPlaneCoefficient.a = 0;
             x_pPlaneCoefficient.b = 0;
             x_pPlaneCoefficient.c = 0;
             x_pPlaneCoefficient.d = 0;
             bool l_bResule = false;
-            l_bResule = ThreeColline(x_vVector1, x_vVector2, x_vVector3,0.01);
+            l_bResule = ThreeColline(x_vVector1, x_vVector2, x_vVector3,x_nLinePrecision);
             if (l_bResule == false)
             {
                 DataType.BasicDataType.vector l_vVector1 = BasicMathTool.SubVector(x_vVector1, x_vVector2);
