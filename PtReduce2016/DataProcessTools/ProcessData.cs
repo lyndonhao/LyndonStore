@@ -12,7 +12,7 @@ namespace DataProcessTools
 {
     public class ProcessData
     {
-        public List<DataType.StaubliRobotData.St_PointRx> PtReduce(double x_nPrecision, List<DataType.StaubliRobotData.St_PointRx> x_ListPoint,out List<int> x_ListIndex)
+        public List<DataType.StaubliRobotData.St_PointRx> PtReduce(double x_nLinePrecision,double x_nCirclePrecision, List<DataType.StaubliRobotData.St_PointRx> x_ListPoint,out List<int> x_ListIndex)
         {
             x_ListIndex = null;
             ParseData ParseTool =new ParseData();
@@ -28,7 +28,7 @@ namespace DataProcessTools
                     i = m; j = m + 1; k = m + 2; l = m + 3;
                     if (m <= x_ListPoint.Count - 4)
                     {
-                        l_bResult = PointTool.ThreeColline(x_ListPoint[i], x_ListPoint[j], x_ListPoint[k], x_nPrecision);
+                        l_bResult = PointTool.ThreeColline(x_ListPoint[i], x_ListPoint[j], x_ListPoint[k], x_nLinePrecision);
                         if (l_bResult == true) { m = m + 1; l_ListIndex.Add(j); }
                     }
                     else
@@ -43,7 +43,7 @@ namespace DataProcessTools
                     i = m; j = m + 1; k = m + 2; l = m + 3;
                     if (m <=x_ListPoint.Count - 4)
                     {              
-                        l_bResult = PointTool.IsOnCircle(x_ListPoint[i], x_ListPoint[j], x_ListPoint[k], x_ListPoint[l], x_nPrecision);
+                        l_bResult = PointTool.IsOnCircle(x_ListPoint[i], x_ListPoint[j], x_ListPoint[k], x_ListPoint[l],x_nLinePrecision ,x_nCirclePrecision);
                         if (l_bResult == true) { m = m + 1; l_ListIndex.Add(j); } else { m = m + 2; }
                     }
                     else
