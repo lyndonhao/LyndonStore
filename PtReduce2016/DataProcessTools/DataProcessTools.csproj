@@ -48,6 +48,10 @@
       <Project>{31221b5a-dc1f-4c6c-920c-bf0790babf4b}</Project>
       <Name>DataType</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MathMatics\MathMatics.csproj">
+      <Project>{4b5940c9-9304-42f7-b3de-0aafbb225038}</Project>
+      <Name>MathMatics</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

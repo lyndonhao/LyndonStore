@@ -12,46 +12,69 @@ namespace DataProcessTools
 {
     public class ProcessData
     {
-        public bool PtReduce(ref List<DataType.StaubliRobotData.St_PointRx> x_ListPoint)
+        public List<DataType.StaubliRobotData.St_PointRx> PtReduce(double x_nPrecision, List<DataType.StaubliRobotData.St_PointRx> x_ListPoint,out List<int> x_ListIndex)
         {
-            //x_ListPoint = null;
-            //ParseData ParseTool =new ParseData();
-            //List<DataType.StaubliRobotData.St_PointRx> l_ListPoint = new List<DataType.StaubliRobotData.St_PointRx>();
-            //List<int> l_ListIndex1=new List<int>();
-            //List<int> l_ListIndex2 = new List<int>();
-            //bool l_bResult = false;
-            //bool l_bResult1 = ParseTool.FindString(x_sStartString, x_sTargetString, ref l_ListIndex1);       
-            //bool l_bResult2 = ParseTool.FindString(x_sEndString, x_sTargetString, ref l_ListIndex2);
-            //if (l_bResult1 == true & l_bResult2 == true)
-            //{
-            //    int l_nStartIndex = l_ListIndex1[0];
-            //    int l_nEndIndex = l_ListIndex2[0];
-            //    l_bResult = ParseTool.getPoint(x_sIdentifier1, x_sIdentifier2, x_sTargetString, l_nStartIndex,l_nEndIndex,out l_ListPoint);
-            //    if (l_bResult == true)
-            //    {
- 
-            //    }
-            //}
-
-            //return l_bResult;
+            x_ListIndex = null;
             ParseData ParseTool =new ParseData();
             bool l_bResult = false;
+            List<int> l_ListIndex = new List<int>();
+            List<DataType.StaubliRobotData.St_PointRx> l_ListPoint = new List<DataType.StaubliRobotData.St_PointRx>();
             int i = 0, j = 0, k = 0, l = 0, m = 0;
             do
             {
-                i = m; j = m + 1; k = m + 2; l = m + 3;
-                l_bResult = PointTool.ThreeColline(x_ListPoint[i], x_ListPoint[j], x_ListPoint[k]);
-                if (l_bResult == true)
+                l_bResult=true;
+                do
                 {
-                    m = m + 1;
+                    i = m; j = m + 1; k = m + 2; l = m + 3;
+                    if (m <= x_ListPoint.Count - 4)
+                    {
+                        l_bResult = PointTool.ThreeColline(x_ListPoint[i], x_ListPoint[j], x_ListPoint[k], x_nPrecision);
+                        if (l_bResult == true) { m = m + 1; l_ListIndex.Add(j); }
+                    }
+                    else
+                    {
+                        l_bResult = false;
+                    }
                 }
-                else
+                while (l_bResult == true);
+                l_bResult=true;
+                do
                 {
-                    l_bResult=PointTool.IsOnCircle()
+                    i = m; j = m + 1; k = m + 2; l = m + 3;
+                    if (m <=x_ListPoint.Count - 4)
+                    {              
+                        l_bResult = PointTool.IsOnCircle(x_ListPoint[i], x_ListPoint[j], x_ListPoint[k], x_ListPoint[l], x_nPrecision);
+                        if (l_bResult == true) { m = m + 1; l_ListIndex.Add(j); } else { m = m + 2; }
+                    }
+                    else
+                    {
+                        l_bResult = false;
+                    }
                 }
+                while (l_bResult == true);
             }
             while (m<=x_ListPoint.Count-4);
-            return l_bResult;
+
+            
+            for (int x = 0; x <= x_ListPoint.Count - 1;x++ )
+            {
+                bool l_bSame = false;
+                
+                for (int y = 0; y <= l_ListIndex.Count - 1; y++)
+                {
+                    if (x == l_ListIndex[y])
+                    {
+                        l_bSame = true;
+                        break;
+                    }    
+                }
+                if (l_bSame == false)
+                {
+                    l_ListPoint.Add(x_ListPoint[x]);
+                }
+            }
+            x_ListIndex = l_ListIndex;
+            return l_ListPoint;
         }
     }
 }

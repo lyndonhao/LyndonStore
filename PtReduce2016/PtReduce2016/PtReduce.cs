@@ -105,13 +105,17 @@ namespace PtReduce2016
            // bool l_bResult=a.PtReduce("/",',',)
             string l_logPath = string.Empty;
             FileTools.fileRead a = new FileTools.fileRead();
+            ParseData c=new ParseData();
             OpenFileDialog ofd = new OpenFileDialog();
             List<int> l_ListIndex=new List<int>();
+            List<DataType.StaubliRobotData.St_PointRx> l_ListPoint=new List<StaubliRobotData.St_PointRx>();
+            List<DataType.StaubliRobotData.St_PointRx> l_ListPoint1 = new List<StaubliRobotData.St_PointRx>();
             if (ofd.ShowDialog() == DialogResult.OK || ofd.ShowDialog() == DialogResult.Yes)
             {
-                l_logPath = ofd.FileName;
-                string[] l_s = a.ReadTxt(l_logPath);
-                List<DataType.StaubliRobotData.St_PointRx> l_ListPoint = b.PtReduce("/", ',', l_s);
+               l_logPath = ofd.FileName;
+               string[] l_s = a.ReadTxt(l_logPath);
+               bool l_bResult = c.getPoint("/", ',', l_s, "LaserON", "LaserOFF", out l_ListPoint);
+               l_ListPoint1 = b.PtReduce(100, l_ListPoint,out l_ListIndex);
                 //bool l_bResult = ParseData.FindString("LaserON", l_s, ref l_ListIndex);
                 //int l_nstart = l_ListIndex[0];
                 //l_bResult = ParseData.FindString("LaserOFF", l_s, ref l_ListIndex);
