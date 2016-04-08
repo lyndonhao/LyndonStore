@@ -48,6 +48,10 @@
       <Project>{31221b5a-dc1f-4c6c-920c-bf0790babf4b}</Project>
       <Name>DataType</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DocTools\FileTools.csproj">
+      <Project>{1ea86080-244b-4d05-90d4-b41d9e19d3b7}</Project>
+      <Name>FileTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MathMatics\MathMatics.csproj">
       <Project>{4b5940c9-9304-42f7-b3de-0aafbb225038}</Project>
       <Name>MathMatics</Name>
