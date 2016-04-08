@@ -188,7 +188,15 @@ namespace DataProcessTools
             string l_sString = string.Empty;
             for (int i = 0; i <= x_nNumber.Length-1; i++)
             {
-                l_sString = l_sString + x_nNumber[i].ToString("f3")+x_sSeparator;
+                if (i != x_nNumber.Length - 1)
+                {
+                    l_sString = l_sString + x_nNumber[i].ToString("f3") + x_sSeparator;
+                }
+                else
+                {
+                    l_sString = l_sString + x_nNumber[i].ToString("f3");
+                }
+                
             }
             return l_sString;
         }
