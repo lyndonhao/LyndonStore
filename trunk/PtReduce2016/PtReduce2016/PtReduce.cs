@@ -219,5 +219,10 @@ namespace PtReduce2016
                  throw ex;
              }
         }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
