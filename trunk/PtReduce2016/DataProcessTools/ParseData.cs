@@ -355,8 +355,8 @@ namespace DataProcessTools
         public string[] StringEmpty(string[] x_sString,int x_nStartIndex,int x_nEndIndex)
         {
             string[] l_sString = new string[x_sString.Length];
-            l_sString = x_sString;
-            for (int i = x_nStartIndex; i <= x_nEndIndex - 1; i++)
+            for (int i = 0; i < x_sString.Length; i++){ l_sString[i] = x_sString[i]; }  
+            for (int i = x_nStartIndex; i <= x_nEndIndex ; i++)
             {
                 l_sString[i] = string.Empty;
             }  
@@ -372,6 +372,26 @@ namespace DataProcessTools
             string l_sJoint = Joint2String(x_jJoint, x_sPointSeparator);
             string l_sPoint = Point2String(x_pPoint, x_sPointSeparator);
             l_sString = "MOVEJ" + x_sPropertySeparator + l_sJoint + x_sPropertySeparator + l_sPoint + x_sPropertySeparator;
+            return l_sString;
+        }
+
+        public string[] Trans2Standard(List<DataType.StaubliRobotData.St_JointRx> x_jJoint,List<DataType.StaubliRobotData.St_PointRx> x_pPoint, string x_sPropertySeparator, string x_sPointSeparator, string[] x_sString,int x_nStartIndex,int x_nEndIndex)
+        {
+            string[] l_sString = EvaluateString(x_sString);
+            l_sString = StringEmpty(x_sString, x_nStartIndex, x_nEndIndex);
+            int j = 0;
+            for (int i = x_nStartIndex ; i <= x_jJoint.Count+x_nStartIndex-1; i++)
+            {
+                l_sString[i] = Trans2Standard(x_jJoint[j], x_pPoint[j], x_sPropertySeparator, x_sPointSeparator);
+                j = j + 1;
+            }
+            return l_sString;
+        }
+
+        public string[] EvaluateString(string[] x_sString)
+        {
+            string[] l_sString = new string[x_sString.Length];
+            for (int i = 0; i < x_sString.Length; i++) { l_sString[i] = x_sString[i]; }
             return l_sString;
         }
     }

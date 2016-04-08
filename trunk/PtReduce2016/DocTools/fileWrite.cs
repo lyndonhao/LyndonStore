@@ -10,34 +10,36 @@ namespace FileTools
 {
    public class fileWrite
     {
-        //public void WriteTxt()
-        //{
-        //    string str = "你的字符串";
-        //    string filePath = "d:\\infor.txt";//这里是你的已知文件
-        //    FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite);
-        //    StreamWriter sw = new StreamWriter(fs);
-        //    fs.SetLength(0);//首先把文件清空了。
-        //    sw.Write(str);//写你的字符串。
-        //    sw.Close();
-        //}
-
-        public void WriteTxt(string x_sOutString,string x_sPath)
+       /// <summary>
+       /// 输出txt文件
+       /// </summary>
+       /// <param name="x_sOutString"></param>
+       /// <param name="x_sPath"></param>
+        public bool WriteTxt(string[] x_sOutString,string x_sPath)
         {
-            try 
+            bool l_bResult = false;
+            if (x_sOutString != null)
             {
-                System.IO.FileStream l_file = new System.IO.FileStream(x_sPath, System.IO.FileMode.Create, System.IO.FileAccess.Write);
-                System.IO.TextWriter l_text = new System.IO.StreamWriter(l_file, System.Text.Encoding.Default);
-                l_text.Write(x_sOutString);
+                StreamWriter sw = new StreamWriter(x_sPath);
+                try
+                {
+                    foreach (string s in x_sOutString) { sw.WriteLine(s); }
+                    //sw.WriteLine("cc);
+                    sw.Close();
+                    l_bResult = true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error:WriteTxt exception: " + ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception("Error:WriteTxt exception: " + ex.Message);
+                l_bResult = false;
             }
+            return l_bResult;
             
-        }
-        public void WriteTxt(string[] x_sOutString, string x_sPath)
-        {
-            for(int i=0;i<=x_sOutString.Length;i++){ WriteTxt(x_sOutString[i], x_sPath); }
-        }
+            
+        }  
     }
 }

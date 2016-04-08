@@ -136,35 +136,37 @@ namespace PtReduce2016
                 //读取文件
                string[] l_s = a.ReadTxt(l_logPath);
                 //获取点
-               string[] l_s1 = c.StringEmpty(l_s, 44, 88);
-               bool l_bResult = c.getPoint("/", ',', l_s, "LaserON", "LaserOFF", out l_ListPoint);
+                string[] l_s2=new string[l_s.Length];
+                bool l_bok = b.PtReduce(l_s,out GlobalData.sOutString, 0.05, 0.05, "LaserON", "LaserOFF");
+               //string[] l_s1 = c.StringEmpty(l_s, 44, 88);
+               //bool l_bResult = c.getPoint("/", ',', l_s, "LaserON", "LaserOFF", out l_ListPoint);
                 //缩减点
                //l_ListPoint1 = b.PtReduce(0.008,0.008, l_ListPoint,out l_ListIndex);
-               string l_sString = c.Trans2Standard(l_jJoint, l_pPoint, "/",",");
+               //string l_sString = c.Trans2Standard(l_jJoint, l_pPoint, "/",",");
                 //输出txt文件
-               try
-            {
-                string name = "aa";  //文件名
-                string content = "bb";  //文件内容
-                string path = string.Empty;  //文件路径
-                SaveFileDialog save = new SaveFileDialog();
-                if (save.ShowDialog() == DialogResult.OK)
-                    path = save.FileName;
-                if (path != string.Empty)
-                {
-                    using (System.IO.FileStream file = new System.IO.FileStream(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
-                    {
-                        using (System.IO.TextWriter text = new System.IO.StreamWriter(file, System.Text.Encoding.Default))
-                        {
-                            text.Write(content);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            //   try
+            //{
+            //    string name = "aa";  //文件名
+            //    string content = "bb";  //文件内容
+            //    string path = string.Empty;  //文件路径
+            //    SaveFileDialog save = new SaveFileDialog();
+            //    if (save.ShowDialog() == DialogResult.OK)
+            //        path = save.FileName;
+            //    if (path != string.Empty)
+            //    {
+            //        using (System.IO.FileStream file = new System.IO.FileStream(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+            //        {
+            //            using (System.IO.TextWriter text = new System.IO.StreamWriter(file, System.Text.Encoding.Default))
+            //            {
+            //                text.Write(content);
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
         
                 //bool l_bResult = ParseData.FindString("LaserON", l_s, ref l_ListIndex);
                 //int l_nstart = l_ListIndex[0];
@@ -191,6 +193,31 @@ namespace PtReduce2016
             
 
 
+        }
+
+        private void OutTxt_Click(object sender, EventArgs e)
+        {
+             try
+             {
+                 string l_sPath = string.Empty;  //文件路径
+                 SaveFileDialog l_save = new SaveFileDialog();
+                 bool l_bResult = false;
+                 l_save.Filter = "(*.txt)|*.txt"; 
+                 if (l_save.ShowDialog() == DialogResult.OK){ l_sPath = l_save.FileName; }
+                 if (l_sPath != string.Empty)
+                 {
+                     FileTools.fileWrite fw = new FileTools.fileWrite();
+                     l_bResult=fw.WriteTxt(GlobalData.sOutString, l_sPath);
+                     if (l_bResult == false)
+                     {
+                         MessageBox.Show("未进行缩减点操作，输出文件失败。");
+                     }
+                 }
+             }
+             catch (Exception ex)
+             {
+                 throw ex;
+             }
         }
     }
 }

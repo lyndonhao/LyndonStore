@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace PtReduce2016
 {
-    class GlobalData
+   public static class GlobalData
     {
+       public static string[] sOutString=null;
     }
 }
