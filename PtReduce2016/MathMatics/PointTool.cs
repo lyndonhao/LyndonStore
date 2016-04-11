@@ -8,6 +8,25 @@ namespace MathMatics
 {
     public static class PointTool
     {
+        /// <summary>
+        /// 空间点到直线距离 test success
+        /// </summary>
+        /// <param name="x_vVector1"></param>
+        /// <param name="x_vVector2"></param>
+        /// <param name="x_vVector3"></param>
+        /// <returns></returns>
+        public static double PointToLineDistance(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3)
+        {
+            double l_nDistance = 0;
+            //d=l_x/l_y
+            DataType.BasicDataType.vector l_MA = BasicMathTool.SubVector(x_vVector1, x_vVector2);
+            DataType.BasicDataType.vector l_MB = BasicMathTool.SubVector(x_vVector1, x_vVector3);
+            DataType.BasicDataType.vector l_MAB = BasicMathTool.Vect3CrossPord(l_MB,l_MA);
+            double l_x = BasicMathTool.VectorNorm(l_MAB);
+            double l_y = BasicMathTool.VectorNorm(l_MA);
+            l_nDistance =(double) l_x / l_y;
+            return l_nDistance;
+        }
         public static DataType.BasicDataType.vector Point2Vector(DataType.StaubliRobotData.St_PointRx x_pPoint)
         {
             DataType.BasicDataType.vector l_v;
@@ -16,25 +35,21 @@ namespace MathMatics
             l_v.z = x_pPoint.z;
             return l_v;
         }
-        /// <summary>
-        /// 判断三点共线(第三点到直线的距离作为精度)
-        /// </summary>
-        /// <returns>true：共线</returns>false：不共线
-        public static bool ThreeColline(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, double x_nDistancePrecision)
+         //<summary>
+         //判断三点共线(第三点到直线的距离作为精度【相关技术要求】)
+         //</summary>
+         //<returns>true：共线</returns>false：不共线
+        public static bool CKYThreeColline(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, double x_nDistancePrecision)
         {
-            bool l_bOk = false;
-            DataType.BasicDataType.vector l_V1, l_V2;
-            l_V1 = BasicMathTool.SubVector(x_vVector1, x_vVector2);
-            l_V2 = BasicMathTool.SubVector(x_vVector2, x_vVector3);
-            if (Math.Abs(l_V2.x * l_V1.y - l_V1.x * l_V2.y) <= x_nPrecision & Math.Abs(l_V2.x * l_V1.z - l_V2.z * l_V1.x) <= x_nPrecision)
-            {
-                l_bOk = true;
-            }
-            else
-            {
-                l_bOk = false;
-            }
-            return l_bOk;
+            bool l_bResult = false;
+            double l_nDiastance = 0;
+            DataType.BasicDataType.vector l_V1, l_V2, l_V3;
+            l_V1 = Point2Vector(x_pPoint1);
+            l_V2 = Point2Vector(x_pPoint2);
+            l_V3 = Point2Vector(x_pPoint3);
+            l_nDiastance = PointToLineDistance(l_V1, l_V2, l_V3);
+            if (l_nDiastance <= x_nDistancePrecision) { l_bResult = true; } else { l_bResult = false; }
+            return l_bResult; 
         }
         /// <summary>
         /// 判断三点共线

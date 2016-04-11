@@ -44,6 +44,12 @@ namespace MathMatics
             }
             return l_bResult;
         }
+        /// <summary>
+        /// 两点间距离
+        /// </summary>
+        /// <param name="x_vVector1"></param>
+        /// <param name="x_vVector2"></param>
+        /// <returns></returns>
         public static double VectorDistance(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2)
         {
             double l_nValue = Math.Sqrt(Math.Pow(x_vVector2.x - x_vVector1.x, 2) + Math.Pow(x_vVector2.y - x_vVector1.y, 2) + Math.Pow(x_vVector2.z - x_vVector1.z, 2));
@@ -89,6 +95,10 @@ namespace MathMatics
             return l_vResule;
         }
 
-       
+        public static double VectorNorm(DataType.BasicDataType.vector x_vVector)
+        {
+            double l_norm = Math.Sqrt(Math.Pow(x_vVector.x, 2) + Math.Pow(x_vVector.y, 2) + Math.Pow(x_vVector.z, 2));
+            return l_norm;
+        }
     }
 }
