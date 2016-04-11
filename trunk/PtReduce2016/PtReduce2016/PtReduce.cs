@@ -105,5 +105,22 @@ namespace PtReduce2016
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataType.BasicDataType.vector l_v1 = new DataType.BasicDataType.vector();
+            DataType.BasicDataType.vector l_v2 = new DataType.BasicDataType.vector();
+            DataType.BasicDataType.vector l_v3 = new DataType.BasicDataType.vector();
+            l_v1.x = -1;
+            l_v1.y = 0;
+            l_v1.z = 2;
+            l_v2.x = 1;
+            l_v2.y = 2;
+            l_v2.z = -1;
+            l_v3.x = 2;
+            l_v3.y = 4;
+            l_v3.z = 1;
+            double l_nDistance = PointTool.PointToLineDistance(l_v1, l_v2, l_v3);
+        }
     }
 }
