@@ -18,6 +18,7 @@ namespace PtReduce2016
 {
     public partial class PtReuce : Form
     {
+        public int a = new int();
         public PtReuce()
         {
             InitializeComponent();
@@ -27,6 +28,10 @@ namespace PtReduce2016
         {
             txB_LinePrecison.Text = "0.5";
             txBCirclePrecision.Text = "0.5";
+            
+            
+           // label_NewPoint.Text=conv
+
         }
 
 
@@ -51,14 +56,20 @@ namespace PtReduce2016
                {
                    //读取文件
                    string[] l_s = fr.ReadTxt(l_sPath);
-                   bool l_bok = l_ProcessData.PtReduce(l_s, out GlobalData.sOutString, l_nlinePrecision, l_nCirclePrecision, "LaserON", "LaserOFF");
+                   //GlobalData.sOldStringLength = l_s.Length;
+                   int l_ReduceLength=new int();
+                   bool l_bok = l_ProcessData.PtReduce(l_s, out GlobalData.sOutString, l_nlinePrecision, l_nCirclePrecision, "LaserON", "LaserOFF",ref l_ReduceLength);
+                   label_OldPoint.Text = Convert.ToString(l_s.Length);
+                   label_NewPoint.Text = Convert.ToString(l_s.Length-l_ReduceLength);
+                   label_ReducePoint.Text = Convert.ToString(l_ReduceLength);
+                      // .Text = Convert.ToString(l_s.Length);
                }
            }
            else
            {
-              // MessageBox.Show("11");
-               GlobalData.sError[0] = "12";
-               MessageBox.Show(GlobalData.sError[0]);
+               MessageBox.Show("11");
+              // GlobalData.sError[0] = "12";
+               //MessageBox.Show(GlobalData.sError[0]);
            }
            
               
