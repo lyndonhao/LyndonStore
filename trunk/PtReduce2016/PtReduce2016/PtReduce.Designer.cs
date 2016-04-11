@@ -39,12 +39,12 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_PointInfor = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label_ReducePoint = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.label_NewPoint = new System.Windows.Forms.Label();
+            this.label_OldPoint = new System.Windows.Forms.Label();
             this.tabPage_Version = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -155,12 +155,12 @@
             // tabPage_PointInfor
             // 
             this.tabPage_PointInfor.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage_PointInfor.Controls.Add(this.label8);
+            this.tabPage_PointInfor.Controls.Add(this.label_ReducePoint);
             this.tabPage_PointInfor.Controls.Add(this.label3);
             this.tabPage_PointInfor.Controls.Add(this.label7);
             this.tabPage_PointInfor.Controls.Add(this.label4);
-            this.tabPage_PointInfor.Controls.Add(this.label6);
-            this.tabPage_PointInfor.Controls.Add(this.label5);
+            this.tabPage_PointInfor.Controls.Add(this.label_NewPoint);
+            this.tabPage_PointInfor.Controls.Add(this.label_OldPoint);
             this.tabPage_PointInfor.Location = new System.Drawing.Point(4, 22);
             this.tabPage_PointInfor.Name = "tabPage_PointInfor";
             this.tabPage_PointInfor.Padding = new System.Windows.Forms.Padding(3);
@@ -168,15 +168,15 @@
             this.tabPage_PointInfor.TabIndex = 0;
             this.tabPage_PointInfor.Text = "点数信息";
             // 
-            // label8
+            // label_ReducePoint
             // 
-            this.label8.AutoSize = true;
-            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label8.Location = new System.Drawing.Point(131, 70);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(13, 14);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "0";
+            this.label_ReducePoint.AutoSize = true;
+            this.label_ReducePoint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_ReducePoint.Location = new System.Drawing.Point(131, 70);
+            this.label_ReducePoint.Name = "label_ReducePoint";
+            this.label_ReducePoint.Size = new System.Drawing.Size(13, 14);
+            this.label_ReducePoint.TabIndex = 5;
+            this.label_ReducePoint.Text = "0";
             // 
             // label3
             // 
@@ -205,26 +205,26 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "操作后点数：";
             // 
-            // label6
+            // label_NewPoint
             // 
-            this.label6.AutoSize = true;
-            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label6.Location = new System.Drawing.Point(131, 44);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(13, 14);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "0";
+            this.label_NewPoint.AutoSize = true;
+            this.label_NewPoint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_NewPoint.Location = new System.Drawing.Point(131, 44);
+            this.label_NewPoint.Name = "label_NewPoint";
+            this.label_NewPoint.Size = new System.Drawing.Size(13, 14);
+            this.label_NewPoint.TabIndex = 3;
+            this.label_NewPoint.Text = "0";
             // 
-            // label5
+            // label_OldPoint
             // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Location = new System.Drawing.Point(132, 15);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(13, 14);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "0";
+            this.label_OldPoint.AutoSize = true;
+            this.label_OldPoint.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.label_OldPoint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_OldPoint.Location = new System.Drawing.Point(132, 15);
+            this.label_OldPoint.Name = "label_OldPoint";
+            this.label_OldPoint.Size = new System.Drawing.Size(13, 14);
+            this.label_OldPoint.TabIndex = 2;
+            this.label_OldPoint.Text = "0";
             // 
             // tabPage_Version
             // 
@@ -315,12 +315,12 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage_PointInfor;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label_ReducePoint;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label_NewPoint;
+        private System.Windows.Forms.Label label_OldPoint;
         private System.Windows.Forms.TabPage tabPage_Version;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;

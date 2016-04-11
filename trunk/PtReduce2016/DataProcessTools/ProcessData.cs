@@ -83,7 +83,7 @@ namespace DataProcessTools
             
             return l_bResult;
         }
-        public bool PtReduce(string[] x_sString,out string[] x_sOutString, double x_nLinePrecision, double x_nCirclePrecision,string x_sStartIdentifier,string x_sEndIdentifier)
+        public bool PtReduce(string[] x_sString,out string[] x_sOutString, double x_nLinePrecision, double x_nCirclePrecision,string x_sStartIdentifier,string x_sEndIdentifier,ref int x_nReucePoint)
         {
             bool l_bResult = false;
             //fileRead fr = new fileRead();
@@ -102,6 +102,7 @@ namespace DataProcessTools
             if (l_bResult1 == true & l_bResult2 == true)
             {
                 l_bResult = PtReduce(x_nLinePrecision, x_nCirclePrecision, ref l_ListJoint, ref l_ListPoint, out l_ListInt);
+                x_nReucePoint = x_sString.Length - l_ListPoint.Count;
                 if (l_bResult==true)
                 {
                     l_bResult1 = ParseTool.FindString(x_sStartIdentifier, x_sString, ref l_ListStart);

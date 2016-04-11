@@ -17,6 +17,26 @@ namespace MathMatics
             return l_v;
         }
         /// <summary>
+        /// 判断三点共线(第三点到直线的距离作为精度)
+        /// </summary>
+        /// <returns>true：共线</returns>false：不共线
+        public static bool ThreeColline(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, double x_nDistancePrecision)
+        {
+            bool l_bOk = false;
+            DataType.BasicDataType.vector l_V1, l_V2;
+            l_V1 = BasicMathTool.SubVector(x_vVector1, x_vVector2);
+            l_V2 = BasicMathTool.SubVector(x_vVector2, x_vVector3);
+            if (Math.Abs(l_V2.x * l_V1.y - l_V1.x * l_V2.y) <= x_nPrecision & Math.Abs(l_V2.x * l_V1.z - l_V2.z * l_V1.x) <= x_nPrecision)
+            {
+                l_bOk = true;
+            }
+            else
+            {
+                l_bOk = false;
+            }
+            return l_bOk;
+        }
+        /// <summary>
         /// 判断三点共线
         /// </summary>
         /// <returns>true：共线</returns>false：不共线
