@@ -340,7 +340,7 @@ namespace DataProcessTools
         /// <param name="x_sEndString"></param>结束字符串
         /// <param name="x_ListPoint"></param>
         /// <returns></returns>
-        public bool getPoint(string x_sIdentifier1, char x_sIdentifier2, string[] x_sTargetString, string x_sStartString, string x_sEndString, out List<DataType.StaubliRobotData.St_PointRx> x_ListPoint)
+        public bool getPoint(string x_sIdentifier1, char x_sIdentifier2, string[] x_sTargetString, string x_sStartString, string x_sEndString,int x_nStartIndex, out List<DataType.StaubliRobotData.St_PointRx> x_ListPoint)
         {
             x_ListPoint = null;
             //ParseData ParseTool = new ParseData();
@@ -352,8 +352,8 @@ namespace DataProcessTools
             bool l_bResult2 = FindString(x_sEndString, x_sTargetString, ref l_ListIndex2);
             if (l_bResult1 == true & l_bResult2 == true)
             {
-                int l_nStartIndex = l_ListIndex1[0];
-                int l_nEndIndex = l_ListIndex2[0];
+                int l_nStartIndex = l_ListIndex1[x_nStartIndex];
+                int l_nEndIndex = l_ListIndex2[x_nStartIndex];
                 l_bResult = getPoint(x_sIdentifier1, x_sIdentifier2, x_sTargetString, l_nStartIndex, l_nEndIndex, out x_ListPoint);      
             }
 

@@ -37,11 +37,7 @@ namespace MathMatics
             if (x_vVector1.x - x_vVector2.x<=x_nPrecision & x_vVector1.y - x_vVector2.y<=x_nPrecision & x_vVector1.z - x_vVector2.z<=x_nPrecision)
             {
                 l_bResult = true;
-            }
-            else
-            {
-                l_bResult = false;
-            }
+            }   
             return l_bResult;
         }
         /// <summary>
