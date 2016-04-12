@@ -374,28 +374,50 @@ namespace DataProcessTools
         /// 转换为离线文件标准字符串形式
         /// </summary>
         /// <returns></returns>
-        public string Trans2Standard(DataType.StaubliRobotData.St_JointRx x_jJoint,DataType.StaubliRobotData.St_PointRx x_pPoint,string x_sPropertySeparator,string x_sPointSeparator)
+        public string Trans2Standard(DataType.StaubliRobotData.St_JointRx x_jJoint,DataType.StaubliRobotData.St_PointRx x_pPoint,string x_sPropertySeparator,string x_sPointSeparator,string x_sMoveType)
         {
             string l_sString = string.Empty;
             string l_sJoint = Joint2String(x_jJoint, x_sPointSeparator);
             string l_sPoint = Point2String(x_pPoint, x_sPointSeparator);
-            l_sString = "MOVEJ" + x_sPropertySeparator + l_sJoint + x_sPropertySeparator + l_sPoint + x_sPropertySeparator;
+            l_sString = x_sMoveType + x_sPropertySeparator + l_sJoint + x_sPropertySeparator + l_sPoint + x_sPropertySeparator;
             return l_sString;
         }
 
-        public string[] Trans2Standard(List<DataType.StaubliRobotData.St_JointRx> x_jJoint,List<DataType.StaubliRobotData.St_PointRx> x_pPoint, string x_sPropertySeparator, string x_sPointSeparator, string[] x_sString,int x_nStartIndex,int x_nEndIndex)
+        public string[] Trans2Standard(List<DataType.StaubliRobotData.St_JointRx> x_jJoint, List<DataType.StaubliRobotData.St_PointRx> x_pPoint, string x_sPropertySeparator, string x_sPointSeparator, string[] x_sString, int x_nStartIndex, int x_nEndIndex, string[] x_sMoveType)
         {
             string[] l_sString = EvaluateString(x_sString);
             l_sString = StringEmpty(x_sString, x_nStartIndex, x_nEndIndex);
             int j = 0;
             for (int i = x_nStartIndex ; i <= x_jJoint.Count+x_nStartIndex-1; i++)
             {
-                l_sString[i] = Trans2Standard(x_jJoint[j], x_pPoint[j], x_sPropertySeparator, x_sPointSeparator);
+                l_sString[i] = Trans2Standard(x_jJoint[j], x_pPoint[j], x_sPropertySeparator, x_sPointSeparator,x_sMoveType[j]);
                 j = j + 1;
             }
             return l_sString;
         }
-
+        public string[] Trans2Standard(List<DataType.StaubliRobotData.St_JointRx> x_jJoint, List<DataType.StaubliRobotData.St_PointRx> x_pPoint, string x_sPropertySeparator, string x_sPointSeparator, string[] x_sString, int x_nStartIndex, int x_nEndIndex, List<string> x_ListMoveType)
+        {
+            string[] l_sMoveType = x_ListMoveType.ToArray();
+            string[] l_sString = Trans2Standard(x_jJoint, x_pPoint, x_sPropertySeparator, x_sPointSeparator, x_sString, x_nStartIndex, x_nEndIndex, l_sMoveType);  
+            return l_sString;
+        }
+        //public List<string[]> Trans2Standard(List<DataType.StaubliRobotData.St_JointRx> x_jJoint, List<DataType.StaubliRobotData.St_PointRx> x_pPoint, string x_sPropertySeparator, string x_sPointSeparator, List<string[]> x_sListTargetString, int x_nStartIndex, int x_nEndIndex, string[] x_sMoveType)
+        //{
+        //    List<string[]> l_ListString = new List<string[]>();
+        //    string[] l_sTargetString=x_sListTargetString[0];
+        //    string[] l_sOutString = Trans2Standard(x_jJoint, x_pPoint, x_sPropertySeparator, x_sPointSeparator,l_sTargetString,x_nStartIndex,x_nEndIndex,x_sMoveType);
+        //    l_ListString.Add(l_sOutString);
+        //    return l_ListString;
+        //}
+        //public List<string[]> Trans2Standard(List<DataType.StaubliRobotData.St_JointRx> x_jJoint, List<DataType.StaubliRobotData.St_PointRx> x_pPoint, string x_sPropertySeparator, string x_sPointSeparator, List<string[]> x_sListTargetString, int x_nStartIndex, int x_nEndIndex, List<string> x_ListMoveType)
+        //{
+        //    List<string[]> l_ListString = new List<string[]>();
+        //    string[] l_sTargetString = x_sListTargetString[0];
+        //    string[] l_sMoveType = x_ListMoveType.ToArray();
+        //    string[] l_sOutString = Trans2Standard(x_jJoint, x_pPoint, x_sPropertySeparator, x_sPointSeparator, l_sTargetString, x_nStartIndex, x_nEndIndex, l_sMoveType);
+        //    l_ListString.Add(l_sOutString);
+        //    return l_ListString;
+        //}
         public string[] EvaluateString(string[] x_sString)
         {
             string[] l_sString = new string[x_sString.Length];
