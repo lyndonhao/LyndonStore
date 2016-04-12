@@ -50,7 +50,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.Group_Precision.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -172,10 +171,9 @@
             // label_ReducePoint
             // 
             this.label_ReducePoint.AutoSize = true;
-            this.label_ReducePoint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label_ReducePoint.Location = new System.Drawing.Point(131, 70);
             this.label_ReducePoint.Name = "label_ReducePoint";
-            this.label_ReducePoint.Size = new System.Drawing.Size(13, 14);
+            this.label_ReducePoint.Size = new System.Drawing.Size(11, 12);
             this.label_ReducePoint.TabIndex = 5;
             this.label_ReducePoint.Text = "0";
             // 
@@ -209,10 +207,9 @@
             // label_NewPoint
             // 
             this.label_NewPoint.AutoSize = true;
-            this.label_NewPoint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label_NewPoint.Location = new System.Drawing.Point(131, 44);
             this.label_NewPoint.Name = "label_NewPoint";
-            this.label_NewPoint.Size = new System.Drawing.Size(13, 14);
+            this.label_NewPoint.Size = new System.Drawing.Size(11, 12);
             this.label_NewPoint.TabIndex = 3;
             this.label_NewPoint.Text = "0";
             // 
@@ -220,10 +217,9 @@
             // 
             this.label_OldPoint.AutoSize = true;
             this.label_OldPoint.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.label_OldPoint.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label_OldPoint.Location = new System.Drawing.Point(132, 15);
             this.label_OldPoint.Name = "label_OldPoint";
-            this.label_OldPoint.Size = new System.Drawing.Size(13, 14);
+            this.label_OldPoint.Size = new System.Drawing.Size(11, 12);
             this.label_OldPoint.TabIndex = 2;
             this.label_OldPoint.Text = "0";
             // 
@@ -277,22 +273,11 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "版本信息：";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(274, 160);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(63, 21);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // PtReuce
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(421, 337);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.Group_Precision);
@@ -338,7 +323,6 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button1;
     }
 }
 

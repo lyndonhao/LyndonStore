@@ -42,13 +42,21 @@ namespace MathMatics
         public static bool CKYThreeColline(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, double x_nDistancePrecision)
         {
             bool l_bResult = false;
-            double l_nDiastance = 0;
             DataType.BasicDataType.vector l_V1, l_V2, l_V3;
             l_V1 = Point2Vector(x_pPoint1);
             l_V2 = Point2Vector(x_pPoint2);
             l_V3 = Point2Vector(x_pPoint3);
-            l_nDiastance = PointToLineDistance(l_V1, l_V2, l_V3);
-            if (l_nDiastance <= x_nDistancePrecision) { l_bResult = true; } else { l_bResult = false; }
+            double l_nDistance1 = BasicMathTool.VectorDistance(l_V1, l_V2);
+            double l_nDistance2 = BasicMathTool.VectorDistance(l_V1, l_V3);
+            if (l_nDistance1 <= l_nDistance2)
+            {
+                double l_nDiastance = PointToLineDistance(l_V1, l_V2, l_V3);
+                if (l_nDiastance <= x_nDistancePrecision) { l_bResult = true; } else { l_bResult = false; }
+            }
+            else
+            {
+                l_bResult = false;
+            }
             return l_bResult; 
         }
         /// <summary>
@@ -179,6 +187,55 @@ namespace MathMatics
             return l_bResult;
         }
         /// <summary>
+        ///  判断点是否在圆上
+        /// </summary>
+        /// <returns></returns>
+        public static bool CKYIsOnCircle(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, DataType.StaubliRobotData.St_PointRx x_pPoint4, double x_nLinePrecision, double x_nCirclePrecision)
+        {
+            bool l_bResult = false;
+            DataType.BasicDataType.vector l_v1, l_v2, l_v3, l_v4;
+            l_v1 = Point2Vector(x_pPoint1);
+            l_v2 = Point2Vector(x_pPoint2);
+            l_v3 = Point2Vector(x_pPoint3);
+            l_v4 = Point2Vector(x_pPoint4);
+            l_bResult = CKYIsOnCircle(l_v1, l_v2, l_v3, l_v4, x_nLinePrecision, x_nCirclePrecision);
+            return l_bResult;
+        }
+
+        /// <summary>
+        ///  判断点是否在圆上(CKY标准，点到圆弧最近距离)
+        /// </summary>
+        /// <returns></returns>
+        public static bool CKYIsOnCircle(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3, DataType.BasicDataType.vector x_vVector4, double x_nLinePrecision, double x_nCirclePrecision)
+        {
+            bool l_bResult = false;
+            DataType.BasicDataType.vector l_vCenterPoint;
+            DataType.BasicDataType.PlaneCoefficient l_pCoefficient;
+            double l_nRadius;
+            l_bResult = CreatPlane(x_vVector1, x_vVector2, x_vVector3, x_nLinePrecision, out l_pCoefficient);
+            if (l_bResult == true)
+            {
+                l_bResult = IsOnPlane(x_vVector4, l_pCoefficient, x_nCirclePrecision);
+                if (l_bResult == true)
+                {
+                    l_bResult = CreatCircle(x_vVector1, x_vVector2, x_vVector3, out l_vCenterPoint, out l_nRadius);
+                    double l_nDistance = BasicMathTool.VectorDistance(l_vCenterPoint, x_vVector4);
+                    double l_nPointToPlaneDistance=PointToPlaneDistance(x_vVector4,l_pCoefficient);
+                    if (Math.Sqrt(Math.Pow(l_nDistance, 2) + Math.Pow(l_nPointToPlaneDistance, 2))<=x_nCirclePrecision)
+                    //if (Math.Abs(l_nDistance - l_nRadius) <= x_nPrecision)
+                    {
+                        l_bResult = true;
+                    }
+                    else
+                    {
+                        l_bResult = false;
+                    }
+                }
+            }
+            return l_bResult;
+        }
+
+        /// <summary>
         /// 三点建立平面 test success
         /// </summary>
         /// <param name="x_vVector1"></param>
@@ -209,17 +266,19 @@ namespace MathMatics
             return l_bResule;
         }
         /// <summary>
-        /// 判断点是否在平面上 test success
+        /// 判断点是否在平面上 
         /// </summary>
         /// <param name="x_vVector"></param>
         /// <param name="x_pPlaneCoefficient"></param>
         /// <param name="x_nPrecision"></param>
         /// <returns></returns>
-        public static bool IsOnPlane(DataType.BasicDataType.vector x_vVector,DataType.BasicDataType.PlaneCoefficient x_pPlaneCoefficient,double x_nPrecision)
+        public static bool IsOnPlane(DataType.BasicDataType.vector x_vVector,DataType.BasicDataType.PlaneCoefficient x_pPlaneCoefficient,double x_nDistancePrecision)
         {
             bool l_bResult = false;
-            double l_nValue = x_pPlaneCoefficient.a * x_vVector.x + x_pPlaneCoefficient.b * x_vVector.y + x_pPlaneCoefficient.c * x_vVector.z + x_pPlaneCoefficient.d;
-            if (l_nValue <= x_nPrecision)
+            //double l_nValue = x_pPlaneCoefficient.a * x_vVector.x + x_pPlaneCoefficient.b * x_vVector.y + x_pPlaneCoefficient.c * x_vVector.z + x_pPlaneCoefficient.d;
+            //l_nValue = Math.Abs(l_nValue) / Math.Sqrt(Math.Pow(x_pPlaneCoefficient.a, 2) + Math.Pow(x_pPlaneCoefficient.b, 2) + Math.Pow(x_pPlaneCoefficient.c, 2));
+            double l_nValue = PointToPlaneDistance(x_vVector, x_pPlaneCoefficient);
+            if (l_nValue <= x_nDistancePrecision)
             {
                 l_bResult = true;
             }
@@ -228,6 +287,35 @@ namespace MathMatics
                 l_bResult = false;
             }
             return l_bResult;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x_vVector"></param>
+        /// <param name="x_pPlaneCoefficient"></param>
+        /// <param name="x_nPrecision"></param>
+        /// <returns></returns>
+        //public static bool CKYIsOnPlane(DataType.BasicDataType.vector x_vVector, DataType.BasicDataType.PlaneCoefficient x_pPlaneCoefficient, double x_nPrecision)
+        //{
+        //    bool l_bResult = false;
+        //    double l_nValue = x_pPlaneCoefficient.a * x_vVector.x + x_pPlaneCoefficient.b * x_vVector.y + x_pPlaneCoefficient.c * x_vVector.z + x_pPlaneCoefficient.d;
+        //    if (l_nValue <= x_nPrecision)
+        //    {
+        //        l_bResult = true;
+        //    }
+        //    else
+        //    {
+        //        l_bResult = false;
+        //    }
+        //    return l_bResult;
+        //}
+        public static double PointToPlaneDistance(DataType.BasicDataType.vector x_vVector, DataType.BasicDataType.PlaneCoefficient x_pPlaneCoefficient)
+        {
+            double l_nValue1 = new double();
+            double l_nValue2 = new double();
+            l_nValue1 = x_pPlaneCoefficient.a * x_vVector.x + x_pPlaneCoefficient.b * x_vVector.y + x_pPlaneCoefficient.c * x_vVector.z + x_pPlaneCoefficient.d;
+            l_nValue2 = Math.Abs(l_nValue1) / Math.Sqrt(Math.Pow(x_pPlaneCoefficient.a, 2) + Math.Pow(x_pPlaneCoefficient.b, 2) + Math.Pow(x_pPlaneCoefficient.c, 2));
+            return l_nValue2;
         }
     }
 }

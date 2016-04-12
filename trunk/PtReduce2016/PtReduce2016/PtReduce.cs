@@ -57,11 +57,12 @@ namespace PtReduce2016
                    //读取文件
                    string[] l_s = fr.ReadTxt(l_sPath);
                    //GlobalData.sOldStringLength = l_s.Length;
-                   int l_ReduceLength=new int();
-                   bool l_bok = l_ProcessData.PtReduce(l_s, out GlobalData.sOutString, l_nlinePrecision, l_nCirclePrecision, "LaserON", "LaserOFF",ref l_ReduceLength);
-                   label_OldPoint.Text = Convert.ToString(l_s.Length);
-                   label_NewPoint.Text = Convert.ToString(l_s.Length-l_ReduceLength);
-                   label_ReducePoint.Text = Convert.ToString(l_ReduceLength);
+                   int l_nRemainLength=new int();
+                   int l_nOldLength = new int();
+                   bool l_bok = l_ProcessData.PtReduce(l_s, out GlobalData.sOutString, l_nlinePrecision, l_nCirclePrecision, "LaserON", "LaserOFF",ref l_nOldLength, ref l_nRemainLength);
+                   label_OldPoint.Text = Convert.ToString(l_nOldLength);
+                   label_NewPoint.Text = Convert.ToString(l_nRemainLength);
+                   label_ReducePoint.Text = Convert.ToString(l_nOldLength-l_nRemainLength);
                       // .Text = Convert.ToString(l_s.Length);
                }
            }

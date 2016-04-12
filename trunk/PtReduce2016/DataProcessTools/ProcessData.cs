@@ -106,8 +106,7 @@ namespace DataProcessTools
             else
             {
                 l_ListIndex.Add(n);
-                l_ListIdentifier.Add("MOVEJ");
-                k = k + 1;
+                l_ListIdentifier.Add("MOVEJ"); 
                 i = 1;
                 do
                 {
@@ -115,82 +114,96 @@ namespace DataProcessTools
                     l_bResult = PointTool.CKYThreeColline(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_nLinePrecision);
                     if (l_bResult == true)
                     {
-                        do
+                        if (n + 2 == l_nCount - 1)
                         { 
-                            l_bResult = PointTool.CKYThreeColline(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2 + i], x_nLinePrecision);
-                            if (l_bResult == true)
-                            {
-                                if (n + 2 + i == l_nCount)
-                                {
-                                    l_ListIndex.Add(n + 2 + i);
-                                    l_ListIdentifier.Add("MOVEJ");
-                                }
-                                else
-                                {
-                                    i = i + 1;
-                                }
-                            }
-                            else
-                            {
-                                l_ListIndex.Add(n + 2 + i - 1);
-                                l_ListIdentifier.Add("MOVEJ");
-                                k = k + 1;
-                                if (n + 2 + i == l_nCount)
-                                {
-                                    l_ListIndex.Add(n + 2 + i);
-                                    l_ListIdentifier.Add("MOVEJ");
-                                }
-                                else
-                                {
-                                    n = n + 2 + i - 1;
-
-                                }
-                            }
+                            l_ListIndex.Add(n + 2);
+                            l_ListIdentifier.Add("MOVEJ");
                         }
-                        while (l_bResult == true && n + 2 + i < l_nCount);
+                        else
+                        {
+                            do
+                            {
+                                l_bResult = PointTool.CKYThreeColline(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2 + i], x_nLinePrecision);
+                                if (l_bResult == true)
+                                {
+                                    if (n + 2 + i == l_nCount - 1)
+                                    {
+                                        l_ListIndex.Add(n + 2 + i);
+                                        l_ListIdentifier.Add("MOVEJ");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        i = i + 1;
+                                    }
+                                }
+                                else
+                                {
+                                    l_ListIndex.Add(n + 2 + i - 1);
+                                    l_ListIdentifier.Add("MOVEJ");
+                                    break;
+                                }
+                            }
+                            while (l_bResult == true && n + 2 + i <= l_nCount - 1);
+                        }
                     }
                     else
                     {
-                        do
+                        if (n + 2 == l_nCount - 1)
                         {
-                            l_bResult = PointTool.IsOnCircle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision);
-                            if (l_bResult == true)
+                            l_ListIndex.Add(n + 1 );
+                            l_ListIndex.Add(n + 2 );
+                            l_ListIdentifier.Add("MOVEC");
+                            l_ListIdentifier.Add("MOVEC");
+                            break;
+                        }
+                        else
+                        {
+                            do
                             {
-                                if (n + 2 + i == l_nCount)
+                                l_bResult = PointTool.CKYIsOnCircle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision);
+                                if (l_bResult == true)
+                                {
+                                    if (n + 2 + i == l_nCount - 1)
+                                    {
+                                        l_ListIndex.Add(n + 1 + i / 2);
+                                        l_ListIndex.Add(n + 2 + i);
+                                        l_ListIdentifier.Add("MOVEC");
+                                        l_ListIdentifier.Add("MOVEC");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        i = i + 1;
+                                    }
+                                }
+                                else
                                 {
                                     l_ListIndex.Add(n + 1 + i / 2);
-                                    l_ListIndex.Add(n + 2 + i);
+                                    l_ListIndex.Add(n + 2 + i - 1);
                                     l_ListIdentifier.Add("MOVEC");
                                     l_ListIdentifier.Add("MOVEC");
-                                }
-                                else
-                                {
-                                    i = i + 1;
+                                    break;
+                                    
                                 }
                             }
-                            else
-                            {
-                                l_ListIndex.Add(n + 1 + i / 2);
-                                l_ListIndex.Add(n + 2 + i - 1);
-                                l_ListIdentifier.Add("MOVEC");
-                                l_ListIdentifier.Add("MOVEC");
-                                k = k + 1;
-                                if (n + 2 + i == l_nCount)
-                                {
-                                    l_ListIndex.Add(n + 2 + i);
-                                    l_ListIdentifier.Add("MOVEJ");
-                                }
-                                else
-                                {
-                                    n = n + 2 + i - 1;
-
-                                }
-                            }
+                            while (l_bResult == true && n + 2 + i <= l_nCount - 1);
                         }
-                        while (l_bResult == true && n + 2 + i < l_nCount);
+                    }
+                    if (n + 2 + i == l_nCount - 1)
+                    {
+                        l_ListIndex.Add(n + 2 + i);
+                        l_ListIdentifier.Add("MOVEJ");
+                        break;
+                    }
+                    else
+                    {
+                        n = n + 2 + i - 1;
+
                     }
                 }
-                while (n + 2 + i < l_nCount);
+                while (n + 2 <= l_nCount-1);
+                
                 for (int j = 0; j <= l_ListIndex.Count-1; j++)
                 {
                     l_ListPoint.Add(x_ListPoint[l_ListIndex[j]]);
@@ -204,7 +217,7 @@ namespace DataProcessTools
             }  
             return l_bResult;
         }
-        public bool PtReduce(string[] x_sString,out string[] x_sOutString, double x_nLinePrecision, double x_nCirclePrecision,string x_sStartIdentifier,string x_sEndIdentifier,ref int x_nReucePoint)
+        public bool PtReduce(string[] x_sString,out string[] x_sOutString, double x_nLinePrecision, double x_nCirclePrecision,string x_sStartIdentifier,string x_sEndIdentifier,ref int x_nOldPoint,ref int x_nRemainPoint)
         {
             bool l_bResult = false;
             //fileRead fr = new fileRead();
@@ -223,8 +236,9 @@ namespace DataProcessTools
             bool l_bResult2 = ParseTool.getPoint("/", ',', x_sString, x_sStartIdentifier, x_sEndIdentifier, out l_ListPoint);
             if (l_bResult1 == true & l_bResult2 == true)
             {
+                x_nOldPoint = l_ListPoint.Count;
                 l_bResult = PtReduce(x_nLinePrecision, x_nCirclePrecision, ref l_ListJoint, ref l_ListPoint, out l_ListInt,out l_ListIdentifier);
-                x_nReucePoint = x_sString.Length - l_ListPoint.Count;
+                x_nRemainPoint = l_ListPoint.Count;
                 if (l_bResult==true)
                 {
                     l_bResult1 = ParseTool.FindString(x_sStartIdentifier, x_sString, ref l_ListStart);
