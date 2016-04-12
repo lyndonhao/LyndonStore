@@ -80,12 +80,12 @@ namespace DataProcessTools
         //        x_ListJoint = l_ListJoint;
         //        l_bResult = true;
         //    }
-            
+
         //    return l_bResult;
         //}
 
 
-        public bool PtReduce(double x_nLinePrecision, double x_nCirclePrecision, ref List<DataType.StaubliRobotData.St_JointRx> x_ListJoint, ref List<DataType.StaubliRobotData.St_PointRx> x_ListPoint, out List<int> x_ListIndex,out List<string> x_ListIdentifier)
+        public bool PtReduce(double x_nLinePrecision, double x_nCirclePrecision, ref List<DataType.StaubliRobotData.St_JointRx> x_ListJoint, ref List<DataType.StaubliRobotData.St_PointRx> x_ListPoint, out List<int> x_ListIndex, out List<string> x_ListIdentifier)
         {
             x_ListIndex = null;
             x_ListIdentifier = null;
@@ -96,8 +96,8 @@ namespace DataProcessTools
 
             List<DataType.StaubliRobotData.St_PointRx> l_ListPoint = new List<DataType.StaubliRobotData.St_PointRx>();
             List<DataType.StaubliRobotData.St_JointRx> l_ListJoint = new List<DataType.StaubliRobotData.St_JointRx>();
-            int n = 0,i=1;
-            int l_nCount=x_ListPoint.Count;
+            int n = 0, i = 1;
+            int l_nCount = x_ListPoint.Count;
 
             if (x_ListPoint == null || x_ListJoint == null || x_ListPoint.Count != x_ListJoint.Count)
             {
@@ -106,7 +106,7 @@ namespace DataProcessTools
             else
             {
                 l_ListIndex.Add(n);
-                l_ListIdentifier.Add("MOVEJ"); 
+                l_ListIdentifier.Add("MOVEJ");
                 i = 1;
                 do
                 {
@@ -115,7 +115,7 @@ namespace DataProcessTools
                     if (l_bResult == true)
                     {
                         if (n + 2 == l_nCount - 1)
-                        { 
+                        {
                             l_ListIndex.Add(n + 2);
                             l_ListIdentifier.Add("MOVEJ");
                         }
@@ -151,8 +151,8 @@ namespace DataProcessTools
                     {
                         if (n + 2 == l_nCount - 1)
                         {
-                            l_ListIndex.Add(n + 1 );
-                            l_ListIndex.Add(n + 2 );
+                            l_ListIndex.Add(n + 1);
+                            l_ListIndex.Add(n + 2);
                             l_ListIdentifier.Add("MOVEC");
                             l_ListIdentifier.Add("MOVEC");
                             break;
@@ -184,7 +184,7 @@ namespace DataProcessTools
                                     l_ListIdentifier.Add("MOVEC");
                                     l_ListIdentifier.Add("MOVEC");
                                     break;
-                                    
+
                                 }
                             }
                             while (l_bResult == true && n + 2 + i <= l_nCount - 1);
@@ -202,9 +202,9 @@ namespace DataProcessTools
 
                     }
                 }
-                while (n + 2 <= l_nCount-1);
-                
-                for (int j = 0; j <= l_ListIndex.Count-1; j++)
+                while (n + 2 <= l_nCount - 1);
+
+                for (int j = 0; j <= l_ListIndex.Count - 1; j++)
                 {
                     l_ListPoint.Add(x_ListPoint[l_ListIndex[j]]);
                     l_ListJoint.Add(x_ListJoint[l_ListIndex[j]]);
@@ -214,20 +214,20 @@ namespace DataProcessTools
                 x_ListJoint = l_ListJoint;
                 x_ListPoint = l_ListPoint;
                 l_bResult = true;
-            }  
+            }
             return l_bResult;
         }
-        public bool PtReduce(string[] x_sTargetString,out string[] x_sOutString, double x_nLinePrecision, double x_nCirclePrecision,string x_sStartIdentifier,string x_sEndIdentifier,ref int x_nOldPoint,ref int x_nRemainPoint)
+        public bool PtReduce(string[] x_sTargetString, out string[] x_sOutString, double x_nLinePrecision, double x_nCirclePrecision, string x_sStartIdentifier, string x_sEndIdentifier, ref int x_nOldPoint, ref int x_nRemainPoint)
         {
             ///实例化相关对象
             bool l_bResult = false;
-            ParseData ParseTool=new ParseData();
+            ParseData ParseTool = new ParseData();
             string[] l_sTargetString = x_sTargetString;
-            List<int> l_ListInt=new List<int>();
+            List<int> l_ListInt = new List<int>();
 
-            List<int> l_ListStartIndex=new List<int>();
-            List<int> l_ListEndIndex=new List<int>();
-            List<string> l_ListIdentifier=new List<string>();
+            List<int> l_ListStartIndex = new List<int>();
+            List<int> l_ListEndIndex = new List<int>();
+            List<string> l_ListIdentifier = new List<string>();
             List<string[]> l_ListOutString = new List<string[]>();
 
             //流程
@@ -235,38 +235,43 @@ namespace DataProcessTools
 
             bool l_bResult1 = ParseTool.FindString(x_sStartIdentifier, x_sTargetString, ref l_ListStartIndex);
             bool l_bResult2 = ParseTool.FindString(x_sEndIdentifier, x_sTargetString, ref l_ListEndIndex);
-            List<DataType.StaubliRobotData.St_JointRx>[] l_ListJoint=new List<DataType.StaubliRobotData.St_JointRx>[l_ListStartIndex.Count];
-            List<DataType.StaubliRobotData.St_PointRx>[] l_ListPoint=new List<DataType.StaubliRobotData.St_PointRx>[l_ListStartIndex.Count];
+            List<DataType.StaubliRobotData.St_JointRx>[] l_ListJoint = new List<DataType.StaubliRobotData.St_JointRx>[l_ListStartIndex.Count];
+            List<DataType.StaubliRobotData.St_PointRx>[] l_ListPoint = new List<DataType.StaubliRobotData.St_PointRx>[l_ListStartIndex.Count];
 
             if (l_bResult1 == true & l_bResult2 == true)
             {
-                for(int i=0;i<=l_ListStartIndex.Count-1;i++)
+                if (l_ListStartIndex.Count == l_ListEndIndex.Count)
                 {
-                    l_bResult1 = ParseTool.getJoint("/", ',', x_sTargetString, l_ListStartIndex[i], l_ListEndIndex[i], out l_ListJoint[i]);
-                    l_bResult2 = ParseTool.getPoint("/", ',', x_sTargetString, l_ListStartIndex[i], l_ListEndIndex[i], out l_ListPoint[i]);
-                    x_nOldPoint = x_nOldPoint + l_ListPoint[i].Count;
+                    for (int i = 0; i <= l_ListStartIndex.Count - 1; i++)
+                    {
+                        l_bResult1 = ParseTool.getJoint("/", ',', x_sTargetString, l_ListStartIndex[i], l_ListEndIndex[i], out l_ListJoint[i]);
+                        l_bResult2 = ParseTool.getPoint("/", ',', x_sTargetString, l_ListStartIndex[i], l_ListEndIndex[i], out l_ListPoint[i]);
+                        x_nOldPoint = x_nOldPoint + l_ListPoint[i].Count;
 
                         if (l_bResult1 == true & l_bResult2 == true)
                         {
-                            
                             l_bResult = PtReduce(x_nLinePrecision, x_nCirclePrecision, ref l_ListJoint[i], ref l_ListPoint[i], out l_ListInt, out l_ListIdentifier);
-                            
                             x_nRemainPoint = x_nRemainPoint + l_ListPoint[i].Count;
-                                if (l_bResult == true)
+                            if (l_bResult == true)
+                            {
+
+                                if (l_bResult1 == true & l_bResult2 == true)
                                 {
-                                
-                                    if (l_bResult1 == true & l_bResult2 == true)
-                                    {
-                                        l_sTargetString = ParseTool.Trans2Standard(l_ListJoint[i], l_ListPoint[i], "/", ",", l_sTargetString, l_ListStartIndex[i] + 1, l_ListEndIndex[i] - 1,l_ListIdentifier);
-                                    }
+                                    l_sTargetString = ParseTool.Trans2Standard(l_ListJoint[i], l_ListPoint[i], "/", ",", l_sTargetString, l_ListStartIndex[i] + 1, l_ListEndIndex[i] - 1, l_ListIdentifier);
                                 }
+                            }
+                            else
+                            {
+                                l_bResult = false;
+                                break;
+                            }
                         }
+                    }
+                    if (l_bResult == true) { x_sOutString = l_sTargetString; }
                 }
-                x_sOutString = l_sTargetString;
-               
             }
 
-         
+
             return l_bResult;
         }
     }
