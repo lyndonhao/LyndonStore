@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.PtReduce = new System.Windows.Forms.Button();
             this.OutTxt = new System.Windows.Forms.Button();
             this.txB_LinePrecison = new System.Windows.Forms.TextBox();
@@ -50,21 +49,15 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.listBox_OperationInfor = new System.Windows.Forms.ListBox();
+            this.tabPage_OperatorInfor = new System.Windows.Forms.TabPage();
             this.Group_Precision.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_PointInfor.SuspendLayout();
             this.tabPage_Version.SuspendLayout();
+            this.tabPage_OperatorInfor.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(30, 337);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // PtReduce
             // 
@@ -135,7 +128,7 @@
             // 
             this.groupBox2.Controls.Add(this.PtReduce);
             this.groupBox2.Controls.Add(this.OutTxt);
-            this.groupBox2.Location = new System.Drawing.Point(256, 25);
+            this.groupBox2.Location = new System.Drawing.Point(307, 25);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(134, 124);
             this.groupBox2.TabIndex = 10;
@@ -146,10 +139,11 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage_PointInfor);
             this.tabControl1.Controls.Add(this.tabPage_Version);
-            this.tabControl1.Location = new System.Drawing.Point(12, 171);
+            this.tabControl1.Controls.Add(this.tabPage_OperatorInfor);
+            this.tabControl1.Location = new System.Drawing.Point(12, 175);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(378, 122);
+            this.tabControl1.Size = new System.Drawing.Size(433, 185);
             this.tabControl1.TabIndex = 12;
             // 
             // tabPage_PointInfor
@@ -164,7 +158,7 @@
             this.tabPage_PointInfor.Location = new System.Drawing.Point(4, 22);
             this.tabPage_PointInfor.Name = "tabPage_PointInfor";
             this.tabPage_PointInfor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_PointInfor.Size = new System.Drawing.Size(370, 96);
+            this.tabPage_PointInfor.Size = new System.Drawing.Size(391, 159);
             this.tabPage_PointInfor.TabIndex = 0;
             this.tabPage_PointInfor.Text = "点数信息";
             // 
@@ -233,7 +227,7 @@
             this.tabPage_Version.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Version.Name = "tabPage_Version";
             this.tabPage_Version.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Version.Size = new System.Drawing.Size(370, 96);
+            this.tabPage_Version.Size = new System.Drawing.Size(391, 159);
             this.tabPage_Version.TabIndex = 1;
             this.tabPage_Version.Text = "版本信息";
             // 
@@ -242,9 +236,9 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(114, 53);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(53, 12);
+            this.label12.Size = new System.Drawing.Size(59, 12);
             this.label12.TabIndex = 3;
-            this.label12.Text = "2016-4-8";
+            this.label12.Text = "2016-4-12";
             // 
             // label11
             // 
@@ -262,7 +256,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(125, 12);
             this.label10.TabIndex = 1;
-            this.label10.Text = "PtReduce.V1.Trunk.23";
+            this.label10.Text = "PtReduce.V1.Trunk.28";
             // 
             // label9
             // 
@@ -273,16 +267,34 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "版本信息：";
             // 
+            // listBox_OperationInfor
+            // 
+            this.listBox_OperationInfor.FormattingEnabled = true;
+            this.listBox_OperationInfor.ItemHeight = 12;
+            this.listBox_OperationInfor.Location = new System.Drawing.Point(-4, 0);
+            this.listBox_OperationInfor.Name = "listBox_OperationInfor";
+            this.listBox_OperationInfor.Size = new System.Drawing.Size(429, 160);
+            this.listBox_OperationInfor.TabIndex = 13;
+            // 
+            // tabPage_OperatorInfor
+            // 
+            this.tabPage_OperatorInfor.Controls.Add(this.listBox_OperationInfor);
+            this.tabPage_OperatorInfor.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_OperatorInfor.Name = "tabPage_OperatorInfor";
+            this.tabPage_OperatorInfor.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_OperatorInfor.Size = new System.Drawing.Size(425, 159);
+            this.tabPage_OperatorInfor.TabIndex = 2;
+            this.tabPage_OperatorInfor.Text = "操作历史";
+            this.tabPage_OperatorInfor.UseVisualStyleBackColor = true;
+            // 
             // PtReuce
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(421, 337);
+            this.ClientSize = new System.Drawing.Size(457, 360);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.Group_Precision);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "PtReuce";
             this.Text = "PtReduce2016";
             this.Load += new System.EventHandler(this.PtReuce_Load);
@@ -294,14 +306,13 @@
             this.tabPage_PointInfor.PerformLayout();
             this.tabPage_Version.ResumeLayout(false);
             this.tabPage_Version.PerformLayout();
+            this.tabPage_OperatorInfor.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Button PtReduce;
         private System.Windows.Forms.Button OutTxt;
         private System.Windows.Forms.TextBox txB_LinePrecison;
@@ -323,6 +334,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ListBox listBox_OperationInfor;
+        private System.Windows.Forms.TabPage tabPage_OperatorInfor;
     }
 }
 

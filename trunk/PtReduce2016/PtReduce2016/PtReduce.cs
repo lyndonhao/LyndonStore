@@ -13,6 +13,7 @@ using System.Collections;
 using DataProcessTools;
 using DataType;
 using MathMatics;
+using System.IO;
 
 namespace PtReduce2016
 {
@@ -32,6 +33,7 @@ namespace PtReduce2016
             
            // label_NewPoint.Text=conv
 
+            //this.reportViewer1.RefreshReport();
         }
 
 
@@ -64,13 +66,13 @@ namespace PtReduce2016
                    label_NewPoint.Text = Convert.ToString(l_nRemainLength);
                    label_ReducePoint.Text = Convert.ToString(l_nOldLength-l_nRemainLength);
                       // .Text = Convert.ToString(l_s.Length);
+                   string l_filename = Path.GetFileName(l_sPath);
+                   listBox_OperationInfor.Items.Add(DateTime.Now.ToString() + ":" + l_filename + " 直线精度：" + txB_LinePrecison.Text + "圆弧精度：" + txBCirclePrecision.Text + "/" + label_OldPoint.Text + "/" + label_NewPoint.Text + "/" + label_ReducePoint.Text);
                }
            }
            else
            {
                MessageBox.Show("11");
-              // GlobalData.sError[0] = "12";
-               //MessageBox.Show(GlobalData.sError[0]);
            }
            
               
