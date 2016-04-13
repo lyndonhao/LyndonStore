@@ -51,6 +51,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage_OperatorInfor = new System.Windows.Forms.TabPage();
             this.listBox_OperationInfor = new System.Windows.Forms.ListBox();
+            this.btn_OutHistory = new System.Windows.Forms.Button();
             this.Group_Precision.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -71,7 +72,7 @@
             // 
             // OutTxt
             // 
-            this.OutTxt.Location = new System.Drawing.Point(18, 75);
+            this.OutTxt.Location = new System.Drawing.Point(18, 62);
             this.OutTxt.Name = "OutTxt";
             this.OutTxt.Size = new System.Drawing.Size(75, 23);
             this.OutTxt.TabIndex = 4;
@@ -126,6 +127,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btn_OutHistory);
             this.groupBox2.Controls.Add(this.PtReduce);
             this.groupBox2.Controls.Add(this.OutTxt);
             this.groupBox2.Location = new System.Drawing.Point(307, 25);
@@ -287,6 +289,16 @@
             this.listBox_OperationInfor.Size = new System.Drawing.Size(429, 160);
             this.listBox_OperationInfor.TabIndex = 13;
             // 
+            // btn_OutHistory
+            // 
+            this.btn_OutHistory.Location = new System.Drawing.Point(18, 95);
+            this.btn_OutHistory.Name = "btn_OutHistory";
+            this.btn_OutHistory.Size = new System.Drawing.Size(75, 23);
+            this.btn_OutHistory.TabIndex = 5;
+            this.btn_OutHistory.Text = "历史记录";
+            this.btn_OutHistory.UseVisualStyleBackColor = true;
+            this.btn_OutHistory.Click += new System.EventHandler(this.btn_OutHistory_Click);
+            // 
             // PtReuce
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -336,6 +348,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ListBox listBox_OperationInfor;
         private System.Windows.Forms.TabPage tabPage_OperatorInfor;
+        private System.Windows.Forms.Button btn_OutHistory;
     }
 }
 
