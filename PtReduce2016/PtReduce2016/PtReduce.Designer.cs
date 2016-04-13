@@ -49,8 +49,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.listBox_OperationInfor = new System.Windows.Forms.ListBox();
             this.tabPage_OperatorInfor = new System.Windows.Forms.TabPage();
+            this.listBox_OperationInfor = new System.Windows.Forms.ListBox();
             this.Group_Precision.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -158,7 +158,7 @@
             this.tabPage_PointInfor.Location = new System.Drawing.Point(4, 22);
             this.tabPage_PointInfor.Name = "tabPage_PointInfor";
             this.tabPage_PointInfor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_PointInfor.Size = new System.Drawing.Size(391, 159);
+            this.tabPage_PointInfor.Size = new System.Drawing.Size(425, 159);
             this.tabPage_PointInfor.TabIndex = 0;
             this.tabPage_PointInfor.Text = "点数信息";
             // 
@@ -227,7 +227,7 @@
             this.tabPage_Version.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Version.Name = "tabPage_Version";
             this.tabPage_Version.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Version.Size = new System.Drawing.Size(391, 159);
+            this.tabPage_Version.Size = new System.Drawing.Size(425, 159);
             this.tabPage_Version.TabIndex = 1;
             this.tabPage_Version.Text = "版本信息";
             // 
@@ -267,15 +267,6 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "版本信息：";
             // 
-            // listBox_OperationInfor
-            // 
-            this.listBox_OperationInfor.FormattingEnabled = true;
-            this.listBox_OperationInfor.ItemHeight = 12;
-            this.listBox_OperationInfor.Location = new System.Drawing.Point(-4, 0);
-            this.listBox_OperationInfor.Name = "listBox_OperationInfor";
-            this.listBox_OperationInfor.Size = new System.Drawing.Size(429, 160);
-            this.listBox_OperationInfor.TabIndex = 13;
-            // 
             // tabPage_OperatorInfor
             // 
             this.tabPage_OperatorInfor.Controls.Add(this.listBox_OperationInfor);
@@ -286,6 +277,15 @@
             this.tabPage_OperatorInfor.TabIndex = 2;
             this.tabPage_OperatorInfor.Text = "操作历史";
             this.tabPage_OperatorInfor.UseVisualStyleBackColor = true;
+            // 
+            // listBox_OperationInfor
+            // 
+            this.listBox_OperationInfor.FormattingEnabled = true;
+            this.listBox_OperationInfor.ItemHeight = 12;
+            this.listBox_OperationInfor.Location = new System.Drawing.Point(-4, 0);
+            this.listBox_OperationInfor.Name = "listBox_OperationInfor";
+            this.listBox_OperationInfor.Size = new System.Drawing.Size(429, 160);
+            this.listBox_OperationInfor.TabIndex = 13;
             // 
             // PtReuce
             // 

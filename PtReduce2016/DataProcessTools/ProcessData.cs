@@ -98,6 +98,7 @@ namespace DataProcessTools
             List<DataType.StaubliRobotData.St_JointRx> l_ListJoint = new List<DataType.StaubliRobotData.St_JointRx>();
             int n = 0, i = 1;
             int l_nCount = x_ListPoint.Count;
+            double l_nAngle = new double();
 
             if (x_ListPoint == null || x_ListJoint == null || x_ListPoint.Count != x_ListJoint.Count)
             {
@@ -151,43 +152,94 @@ namespace DataProcessTools
                     {
                         if (n + 2 == l_nCount - 1)
                         {
-                            l_ListIndex.Add(n + 1);
-                            l_ListIndex.Add(n + 2);
-                            l_ListIdentifier.Add("MOVEC");
-                            l_ListIdentifier.Add("MOVEC");
-                            break;
+                            l_bResult = BasicMathTool.VectAngle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], ref l_nAngle);
+                            if (l_nAngle<=180&&l_bResult==true)
+                            {
+                                l_ListIndex.Add(n + 1);
+                                l_ListIndex.Add(n + 2);
+                                l_ListIdentifier.Add("MOVEC");
+                                l_ListIdentifier.Add("MOVEC");
+                                break;
+                            }
+                            else
+                            {
+                                l_ListIndex.Add(n + 1);
+                                l_ListIndex.Add(n + 2);
+                                l_ListIdentifier.Add("MOVEJ");
+                                l_ListIdentifier.Add("MOVEJ");
+                                break;
+                            }
                         }
                         else
                         {
-                            do
+                            l_bResult = BasicMathTool.VectAngle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], ref l_nAngle);
+                            if (l_nAngle<=178&&l_bResult==true)
                             {
-                                l_bResult = PointTool.CKYIsOnCircle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision);
-                                if (l_bResult == true)
+                                do
                                 {
-                                    if (n + 2 + i == l_nCount - 1)
+                                    l_bResult = PointTool.CKYIsOnCircle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision);
+                                    if (l_bResult == true)
                                     {
-                                        l_ListIndex.Add(n + 1 + i / 2);
-                                        l_ListIndex.Add(n + 2 + i);
-                                        l_ListIdentifier.Add("MOVEC");
-                                        l_ListIdentifier.Add("MOVEC");
-                                        break;
+                                        if (n + 2 + i == l_nCount - 1)
+                                        {
+                                            l_bResult = BasicMathTool.VectAngle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], ref l_nAngle);
+                                            if (l_nAngle<=180&&l_bResult==true)
+                                            {
+                                                l_ListIndex.Add(n + 1 + i / 2);
+                                                l_ListIndex.Add(n + 2 + i);
+                                                l_ListIdentifier.Add("MOVEC");
+                                                l_ListIdentifier.Add("MOVEC");
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                l_ListIndex.Add(n + 1);
+                                                l_ListIndex.Add(n + 2);
+                                                l_ListIndex.Add(n + 2 + i);
+                                                l_ListIdentifier.Add("MOVEC");
+                                                l_ListIdentifier.Add("MOVEC");
+                                                l_ListIdentifier.Add("MOVEJ");
+                                                break;
+                                            }
+                                            
+                                        }
+                                        else
+                                        {
+                                            l_bResult = BasicMathTool.VectAngle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], ref l_nAngle);
+                                            if (l_nAngle<=178&&l_bResult==true)
+                                            {
+                                                i = i + 1;
+                                            }
+                                            else
+                                            {
+                                                l_ListIndex.Add(n + 1 + i / 2);
+                                                l_ListIndex.Add(n + 2 + i);
+                                                l_ListIdentifier.Add("MOVEC");
+                                                l_ListIdentifier.Add("MOVEC");
+                                                break;
+                                            }
+                                        }
                                     }
                                     else
                                     {
-                                        i = i + 1;
+                                        l_ListIndex.Add(n + 1 + i / 2);
+                                        l_ListIndex.Add(n + 2 + i - 1);
+                                        l_ListIdentifier.Add("MOVEC");
+                                        l_ListIdentifier.Add("MOVEC");
+                                        break;
+
                                     }
                                 }
-                                else
-                                {
-                                    l_ListIndex.Add(n + 1 + i / 2);
-                                    l_ListIndex.Add(n + 2 + i - 1);
-                                    l_ListIdentifier.Add("MOVEC");
-                                    l_ListIdentifier.Add("MOVEC");
-                                    break;
-
-                                }
+                                while (l_bResult == true && n + 2 + i <= l_nCount - 1);
                             }
-                            while (l_bResult == true && n + 2 + i <= l_nCount - 1);
+                            else
+                            {
+                                l_ListIndex.Add(n + 1);
+                                l_ListIndex.Add(n + 2);
+                                l_ListIdentifier.Add("MOVEJ");
+                                l_ListIdentifier.Add("MOVEJ");
+                            }
+                            
                         }
                     }
                     if (n + 2 + i == l_nCount - 1)

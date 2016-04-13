@@ -125,5 +125,23 @@ namespace PtReduce2016
             l_v3.z = 1;
             double l_nDistance = PointTool.PointToLineDistance(l_v1, l_v2, l_v3);
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            DataType.BasicDataType.vector v1, v2,v3;
+            v1.x = 1;
+            v1.y = 0;
+            v1.z = 0;
+            v2.x = -1;
+            v2.y = 0;
+            v2.z = 0;
+            v3.x = 0;
+            v3.y = -1;
+            v3.z = 0;
+            double a=new double();
+            bool l_bok= BasicMathTool.VectAngle(v1, v2,ref a);
+             l_bok = BasicMathTool.VectAngle(v2, v3, ref a);
+             l_bok = BasicMathTool.VectAngle(v1, v2,v3, ref a);
+        }
     }
 }
