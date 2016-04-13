@@ -10,14 +10,12 @@ namespace PtReduce2016
     {
        public static string[] sOutString=null;
        public static int sOldStringLength = new int();
-       //public static string[] sError = new string[2] 
-       //{
-       //    sError[0]="1",
-       //    sError[1]="2"
-       //};
-       //public static string getErrorInfor(int x_nIndex)
-       //{
-       //    get{return sError[x_nIndex];};
-       //}
+       public static List<string> ListHistory=new List<string>();
+       public static string[] sError = new string[3]
+       {
+           "错误信息：精度设置不能为空。",
+           "错误信息：未处理相关文件。",
+           "错误信息: 历史记录为空。"
+       };
     }
 }

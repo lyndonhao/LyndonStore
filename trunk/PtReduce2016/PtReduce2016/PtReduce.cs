@@ -67,12 +67,14 @@ namespace PtReduce2016
                    label_ReducePoint.Text = Convert.ToString(l_nOldLength-l_nRemainLength);
                       // .Text = Convert.ToString(l_s.Length);
                    string l_filename = Path.GetFileName(l_sPath);
-                   listBox_OperationInfor.Items.Add(DateTime.Now.ToString() + ":" + l_filename + " 直线精度：" + txB_LinePrecison.Text + "圆弧精度：" + txBCirclePrecision.Text + "/" + label_OldPoint.Text + "/" + label_NewPoint.Text + "/" + label_ReducePoint.Text);
+                   string l_sHistory = DateTime.Now.ToString() + ":" + l_filename + " 直线精度：" + txB_LinePrecison.Text + "圆弧精度：" + txBCirclePrecision.Text + "/" + label_OldPoint.Text + "/" + label_NewPoint.Text + "/" + label_ReducePoint.Text;
+                   listBox_OperationInfor.Items.Add(l_sHistory);
+                   GlobalData.ListHistory.Add(l_sHistory);
                }
            }
            else
            {
-               MessageBox.Show("11");
+               MessageBox.Show(GlobalData.sError[0]);
            }
            
               
@@ -94,7 +96,7 @@ namespace PtReduce2016
                      l_bResult=fw.WriteTxt(GlobalData.sOutString, l_sPath);
                      if (l_bResult == false)
                      {
-                         MessageBox.Show("22");
+                         MessageBox.Show(GlobalData.sError[1]);
                      }
                  }
              }
@@ -103,45 +105,38 @@ namespace PtReduce2016
                  throw ex;
              }
         }
-
-        private void groupBox3_Enter(object sender, EventArgs e)
+        private void btn_OutHistory_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            DataType.BasicDataType.vector l_v1 = new DataType.BasicDataType.vector();
-            DataType.BasicDataType.vector l_v2 = new DataType.BasicDataType.vector();
-            DataType.BasicDataType.vector l_v3 = new DataType.BasicDataType.vector();
-            l_v1.x = -1;
-            l_v1.y = 0;
-            l_v1.z = 2;
-            l_v2.x = 1;
-            l_v2.y = 2;
-            l_v2.z = -1;
-            l_v3.x = 2;
-            l_v3.y = 4;
-            l_v3.z = 1;
-            double l_nDistance = PointTool.PointToLineDistance(l_v1, l_v2, l_v3);
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            DataType.BasicDataType.vector v1, v2,v3;
-            v1.x = 1;
-            v1.y = 0;
-            v1.z = 0;
-            v2.x = -1;
-            v2.y = 0;
-            v2.z = 0;
-            v3.x = 0;
-            v3.y = -1;
-            v3.z = 0;
-            double a=new double();
-            bool l_bok= BasicMathTool.VectAngle(v1, v2,ref a);
-             l_bok = BasicMathTool.VectAngle(v2, v3, ref a);
-             l_bok = BasicMathTool.VectAngle(v1, v2,v3, ref a);
+            
+            if (GlobalData.ListHistory.Count!=0)
+            {
+                try
+                {
+                    string l_sPath = string.Empty;  //文件路径
+                    SaveFileDialog l_save = new SaveFileDialog();
+                    bool l_bResult = false;
+                    l_save.Filter = "(*.txt)|*.txt";
+                    if (l_save.ShowDialog() == DialogResult.OK) { l_sPath = l_save.FileName; }
+                    if (l_sPath != string.Empty)
+                    {
+                        FileTools.fileWrite fw = new FileTools.fileWrite();
+                        string[] l_sHistory = GlobalData.ListHistory.ToArray();
+                        l_bResult = fw.WriteTxt(l_sHistory, l_sPath);
+                        if (l_bResult == false)
+                        {
+                            MessageBox.Show("22");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+            {
+                MessageBox.Show(GlobalData.sError[2]);
+            }
         }
     }
 }
