@@ -91,6 +91,8 @@ namespace DataProcessTools
             x_ListIdentifier = null;
             ParseData ParseTool = new ParseData();
             bool l_bResult = false;
+            bool l_bLine = false;
+            bool l_bCircle = false;
             List<int> l_ListIndex = new List<int>();
             List<string> l_ListIdentifier = new List<string>();
 
@@ -99,6 +101,8 @@ namespace DataProcessTools
             int n = 0, i = 1;
             int l_nCount = x_ListPoint.Count;
             double l_nAngle = new double();
+            double l_nLineDeviation = new double();
+            double l_nCircleDeviation = new double();
 
             if (x_ListPoint == null || x_ListJoint == null || x_ListPoint.Count != x_ListJoint.Count)
             {
@@ -112,7 +116,28 @@ namespace DataProcessTools
                 do
                 {
                     i = 1;
-                    l_bResult = PointTool.CKYThreeColline(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_nLinePrecision);
+                    l_bLine = false;
+                    l_bCircle = false;
+                    l_bLine = PointTool.CKYThreeColline(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_nLinePrecision,ref l_nLineDeviation);
+                    if (n+2+i<=l_nCount-1)
+                    {
+                        l_bCircle = PointTool.CKYIsOnCircle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision, ref l_nCircleDeviation);
+                    }           
+                    if (l_bLine == true && l_bCircle == true)
+                    {
+                        if (l_nLineDeviation<l_nCircleDeviation)
+                        {
+                            l_bResult = true;
+                        }
+                        else
+                        {
+                            l_bResult = false;
+                        }
+                    }
+                    else
+                    {
+                        l_bResult = PointTool.CKYThreeColline(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_nLinePrecision, ref l_nLineDeviation);
+                    }
                     if (l_bResult == true)
                     {
                         if (n + 2 == l_nCount - 1)
@@ -124,7 +149,7 @@ namespace DataProcessTools
                         {
                             do
                             {
-                                l_bResult = PointTool.CKYThreeColline(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2 + i], x_nLinePrecision);
+                                l_bResult = PointTool.CKYThreeColline(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2 + i], x_nLinePrecision,ref l_nLineDeviation);
                                 if (l_bResult == true)
                                 {
                                     if (n + 2 + i == l_nCount - 1)
@@ -177,7 +202,7 @@ namespace DataProcessTools
                             {
                                 do
                                 {
-                                    l_bResult = PointTool.CKYIsOnCircle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision);
+                                    l_bResult = PointTool.CKYIsOnCircle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision,ref l_nCircleDeviation);
                                     if (l_bResult == true)
                                     {
                                         if (n + 2 + i == l_nCount - 1)
