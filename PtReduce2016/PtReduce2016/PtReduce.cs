@@ -62,6 +62,7 @@ namespace PtReduce2016
                    int l_nRemainLength=new int();
                    int l_nOldLength = new int();
                    bool l_bok = l_ProcessData.PtReduce(l_s, out GlobalData.sOutString, l_nlinePrecision, l_nCirclePrecision, "LaserON", "LaserOFF",ref l_nOldLength, ref l_nRemainLength);
+                   
                    label_OldPoint.Text = Convert.ToString(l_nOldLength);
                    label_NewPoint.Text = Convert.ToString(l_nRemainLength);
                    label_ReducePoint.Text = Convert.ToString(l_nOldLength-l_nRemainLength);

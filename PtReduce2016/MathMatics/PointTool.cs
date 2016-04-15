@@ -39,7 +39,7 @@ namespace MathMatics
          //判断三点共线(第三点到直线的距离作为精度【相关技术要求】)
          //</summary>
          //<returns>true：共线</returns>false：不共线
-        public static bool CKYThreeColline(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, double x_nDistancePrecision)
+        public static bool CKYThreeColline(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, double x_nDistancePrecision,ref double x_nActualError)
         {
             bool l_bResult = false;
             DataType.BasicDataType.vector l_V1, l_V2, l_V3;
@@ -51,7 +51,7 @@ namespace MathMatics
             if (l_nDistance1 <= l_nDistance2)
             {
                 double l_nDiastance = PointToLineDistance(l_V1, l_V2, l_V3);
-                if (l_nDiastance <= x_nDistancePrecision) { l_bResult = true; } else { l_bResult = false; }
+                if (l_nDiastance <= x_nDistancePrecision) { l_bResult = true; x_nActualError = l_nDiastance; } else { l_bResult = false; }
             }
             else
             {
@@ -106,7 +106,8 @@ namespace MathMatics
             x_nRadius = 0;
 
             bool l_bOk = false;
-            l_bOk = ThreeColline(x_vVector1, x_vVector2, x_vVector3,0.01);      
+            l_bOk = ThreeColline(x_vVector1, x_vVector2, x_vVector3,0.0000001); 
+            //l_bOk = ThreeColline(x_vVector1, x_vVector2, x_vVector3, 0.01); 
             if (l_bOk == false)
             {
                 double[,] l_nMatrix = new double[3, 3];
@@ -190,7 +191,7 @@ namespace MathMatics
         ///  判断点是否在圆上
         /// </summary>
         /// <returns></returns>
-        public static bool CKYIsOnCircle(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, DataType.StaubliRobotData.St_PointRx x_pPoint4, double x_nLinePrecision, double x_nCirclePrecision)
+        public static bool CKYIsOnCircle(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, DataType.StaubliRobotData.St_PointRx x_pPoint4, double x_nLinePrecision, double x_nCirclePrecision,ref double x_nActualError)
         {
             bool l_bResult = false;
             DataType.BasicDataType.vector l_v1, l_v2, l_v3, l_v4;
@@ -198,7 +199,7 @@ namespace MathMatics
             l_v2 = Point2Vector(x_pPoint2);
             l_v3 = Point2Vector(x_pPoint3);
             l_v4 = Point2Vector(x_pPoint4);
-            l_bResult = CKYIsOnCircle(l_v1, l_v2, l_v3, l_v4, x_nLinePrecision, x_nCirclePrecision);
+            l_bResult = CKYIsOnCircle(l_v1, l_v2, l_v3, l_v4, x_nLinePrecision, x_nCirclePrecision,ref x_nActualError);
             return l_bResult;
         }
 
@@ -206,7 +207,7 @@ namespace MathMatics
         ///  判断点是否在圆上(CKY标准，点到圆弧最近距离)
         /// </summary>
         /// <returns></returns>
-        public static bool CKYIsOnCircle(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3, DataType.BasicDataType.vector x_vVector4, double x_nLinePrecision, double x_nCirclePrecision)
+        public static bool CKYIsOnCircle(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3, DataType.BasicDataType.vector x_vVector4, double x_nLinePrecision, double x_nCirclePrecision,ref double x_nActualError)
         {
             bool l_bResult = false;
             DataType.BasicDataType.vector l_vCenterPoint;
@@ -221,10 +222,12 @@ namespace MathMatics
                     l_bResult = CreatCircle(x_vVector1, x_vVector2, x_vVector3, out l_vCenterPoint, out l_nRadius);
                     double l_nDistance = BasicMathTool.VectorDistance(l_vCenterPoint, x_vVector4);
                     double l_nPointToPlaneDistance=PointToPlaneDistance(x_vVector4,l_pCoefficient);
-                    if (Math.Sqrt(Math.Pow(l_nDistance, 2) + Math.Pow(l_nPointToPlaneDistance, 2))<=x_nCirclePrecision)
+                    double l_nActualError=Math.Sqrt(Math.Pow(l_nDistance-l_nRadius, 2) + Math.Pow(l_nPointToPlaneDistance, 2));
+                    if (l_nActualError <= x_nCirclePrecision)
                     //if (Math.Abs(l_nDistance - l_nRadius) <= x_nPrecision)
                     {
                         l_bResult = true;
+                        x_nActualError = l_nActualError;
                     }
                     else
                     {
@@ -251,7 +254,8 @@ namespace MathMatics
             x_pPlaneCoefficient.c = 0;
             x_pPlaneCoefficient.d = 0;
             bool l_bResule = false;
-            l_bResule = ThreeColline(x_vVector1, x_vVector2, x_vVector3,x_nLinePrecision);
+            //l_bResule = ThreeColline(x_vVector1, x_vVector2, x_vVector3,x_nLinePrecision);
+            l_bResule = ThreeColline(x_vVector1, x_vVector2, x_vVector3, 0.0000001);
             if (l_bResule == false)
             {
                 DataType.BasicDataType.vector l_vVector1 = BasicMathTool.SubVector(x_vVector1, x_vVector2);
