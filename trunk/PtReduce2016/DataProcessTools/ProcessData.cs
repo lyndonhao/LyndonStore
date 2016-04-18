@@ -103,6 +103,8 @@ namespace DataProcessTools
             double l_nAngle = new double();
             double l_nLineDeviation = new double();
             double l_nCircleDeviation = new double();
+            //double l_nRadius1 = new double();
+            //double l_nRadius2 = new double();
 
             if (x_ListPoint == null || x_ListJoint == null || x_ListPoint.Count != x_ListJoint.Count)
             {
@@ -121,7 +123,7 @@ namespace DataProcessTools
                     l_bLine = PointTool.CKYThreeColline(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_nLinePrecision,ref l_nLineDeviation);
                     if (n+2+i<=l_nCount-1)
                     {
-                        l_bCircle = PointTool.CKYIsOnCircle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision, ref l_nCircleDeviation);
+                        l_bCircle = PointTool.CKYIsOnCircle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision,ref l_nCircleDeviation);
                     }           
                     if (l_bLine == true && l_bCircle == true)
                     {
@@ -202,7 +204,15 @@ namespace DataProcessTools
                             {
                                 do
                                 {
-                                    l_bResult = PointTool.CKYIsOnCircle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision,ref l_nCircleDeviation);
+                                    if (i == 1)
+                                    {
+                                        l_bResult = PointTool.CKYIsOnCircle(x_ListPoint[n], x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision, ref l_nCircleDeviation);
+                                    }
+                                    else
+                                    {
+                                        l_bResult = PointTool.CKYIsOnCircle(x_ListPoint[n + 1], x_ListPoint[n + 2], x_ListPoint[n + 3], x_ListPoint[n + 2 + i], x_nLinePrecision, x_nCirclePrecision, ref l_nCircleDeviation);
+                                    }
+                                   
                                     if (l_bResult == true)
                                     {
                                         if (n + 2 + i == l_nCount - 1)
