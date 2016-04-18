@@ -187,6 +187,7 @@ namespace MathMatics
             } 
             return l_bResult;
         }
+
         /// <summary>
         ///  判断点是否在圆上
         /// </summary>
@@ -237,6 +238,61 @@ namespace MathMatics
             }
             return l_bResult;
         }
+
+        //public static bool CKYIsOnCircle(DataType.StaubliRobotData.St_PointRx x_pPoint1, DataType.StaubliRobotData.St_PointRx x_pPoint2, DataType.StaubliRobotData.St_PointRx x_pPoint3, DataType.StaubliRobotData.St_PointRx x_pPoint4, double x_nLinePrecision, double x_nCirclePrecision,ref double x_nPreviousRadius,ref double x_nSubsequentRadius, ref double x_nActualError)
+        //{
+        //    bool l_bResult = false;
+        //    DataType.BasicDataType.vector l_v1, l_v2, l_v3, l_v4;
+        //    l_v1 = Point2Vector(x_pPoint1);
+        //    l_v2 = Point2Vector(x_pPoint2);
+        //    l_v3 = Point2Vector(x_pPoint3);
+        //    l_v4 = Point2Vector(x_pPoint4);
+        //    l_bResult = CKYIsOnCircle(l_v1, l_v2, l_v3, l_v4, x_nLinePrecision, x_nCirclePrecision,ref x_nPreviousRadius,ref x_nSubsequentRadius ,ref x_nActualError);
+        //    return l_bResult;
+        //}
+
+        ///// <summary>
+        /////  判断点是否在圆上(CKY标准，点到圆弧最近距离)
+        ///// </summary>
+        ///// <returns></returns>
+        //public static bool CKYIsOnCircle(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3, DataType.BasicDataType.vector x_vVector4, double x_nLinePrecision, double x_nCirclePrecision,ref double x_nPreviousRadius,ref double x_nSubsequentRadius ,ref double x_nActualError)
+        //{
+        //    bool l_bResult = false;
+        //    DataType.BasicDataType.vector l_vCenterPoint1,l_vCenterPoint2;
+        //    DataType.BasicDataType.PlaneCoefficient l_pCoefficient;
+        //    double l_nRadius1,l_nRadius2;
+        //    l_bResult = CreatPlane(x_vVector1, x_vVector2, x_vVector3, x_nLinePrecision, out l_pCoefficient);
+        //    if (l_bResult == true)
+        //    {
+        //        l_bResult = IsOnPlane(x_vVector4, l_pCoefficient, x_nCirclePrecision);
+        //        if (l_bResult == true)
+        //        {
+        //            l_bResult = CreatCircle(x_vVector1, x_vVector2, x_vVector3, out l_vCenterPoint1, out l_nRadius1);
+        //            l_bResult = CreatCircle(x_vVector1, x_vVector2, x_vVector4, out l_vCenterPoint2, out l_nRadius2);
+        //            if (l_bResult == true)
+        //            {
+        //                //double l_nActualError = BasicMathTool.VectorDistance(l_vCenterPoint1, l_vCenterPoint2);
+        //                double l_nActualError = Math.Abs(l_nRadius1 - l_nRadius2);
+        //                if (l_nActualError <= x_nCirclePrecision)
+        //                {
+        //                    l_bResult = true;
+        //                    x_nActualError = l_nActualError;
+        //                    x_nPreviousRadius = l_nRadius1;
+        //                    x_nSubsequentRadius = l_nRadius2;
+        //                }
+        //                else
+        //                {
+        //                    l_bResult = false;
+        //                }
+        //            }
+        //            else
+        //            {
+        //                l_bResult = false;
+        //            }
+        //        }
+        //    }
+        //    return l_bResult;
+        //}
 
         /// <summary>
         /// 三点建立平面 test success
