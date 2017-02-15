@@ -8,6 +8,24 @@ namespace MathMatics
 {
     public static class PointTool
     {
+        private static DataType.BasicDataType.vector _CenterPoint = new DataType.BasicDataType.vector();
+        public static DataType.BasicDataType.vector CenterPoint
+        {
+            set { _CenterPoint = value; }
+            get { return _CenterPoint; }
+        }
+        private static double _Radius = 0;
+        public static double Radius
+        {
+            set { _Radius = value; }
+            get { return _Radius; }
+        }
+        private static bool _UseSpecifyPara = false;
+        public static bool UseSpecifyPara
+        {
+            set { _UseSpecifyPara = value; }
+            get { return _UseSpecifyPara; }
+        }
         /// <summary>
         /// 空间点到直线距离 test success
         /// </summary>
@@ -136,7 +154,13 @@ namespace MathMatics
                         x_vCenterPoint.y = l_CenterPoint[1];
                         x_vCenterPoint.z = l_CenterPoint[2];
                         x_nRadius = Math.Sqrt(Math.Pow(x_vVector1.x - x_vCenterPoint.x, 2) + Math.Pow(x_vVector1.y - x_vCenterPoint.y, 2) + Math.Pow(x_vVector1.z - x_vCenterPoint.z, 2));
-                        
+                        //x_nRadius = Math.Sqrt(Math.Pow(x_vVector2.x - x_vCenterPoint.x, 2) + Math.Pow(x_vVector2.y - x_vCenterPoint.y, 2) + Math.Pow(x_vVector2.z - x_vCenterPoint.z, 2));
+                        //x_nRadius = Math.Sqrt(Math.Pow(x_vVector3.x - x_vCenterPoint.x, 2) + Math.Pow(x_vVector3.y - x_vCenterPoint.y, 2) + Math.Pow(x_vVector3.z - x_vCenterPoint.z, 2));
+                        if (x_nRadius >= 10000)
+                        {
+                            l_bOk = false;
+                            x_nRadius = 0;
+                        }
                     }
                 }
             }
@@ -210,6 +234,9 @@ namespace MathMatics
         /// <returns></returns>
         public static bool CKYIsOnCircle(DataType.BasicDataType.vector x_vVector1, DataType.BasicDataType.vector x_vVector2, DataType.BasicDataType.vector x_vVector3, DataType.BasicDataType.vector x_vVector4, double x_nLinePrecision, double x_nCirclePrecision,ref double x_nActualError)
         {
+            //bool l_bTestResult = false;//new
+            //DataType.BasicDataType.vector l_vTestVector=new DataType.BasicDataType.vector();//new
+
             bool l_bResult = false;
             DataType.BasicDataType.vector l_vCenterPoint;
             DataType.BasicDataType.PlaneCoefficient l_pCoefficient;
@@ -220,10 +247,22 @@ namespace MathMatics
                 l_bResult = IsOnPlane(x_vVector4, l_pCoefficient, x_nCirclePrecision);
                 if (l_bResult == true)
                 {
-                    l_bResult = CreatCircle(x_vVector1, x_vVector2, x_vVector3, out l_vCenterPoint, out l_nRadius);
+                    if (_UseSpecifyPara == false)
+                    {
+                        l_bResult = CreatCircle(x_vVector1, x_vVector2, x_vVector3, out l_vCenterPoint, out l_nRadius);
+                    }
+                    else
+                    {
+                        l_vCenterPoint = _CenterPoint;
+                        l_nRadius = _Radius;
+                    }
+                    //l_bTestResult = PointProjectToPlane(x_vVector4, l_pCoefficient, out l_vTestVector);//new
+                    //double l_nDistance1 = BasicMathTool.VectorDistance(l_vCenterPoint, l_vTestVector);//new
                     double l_nDistance = BasicMathTool.VectorDistance(l_vCenterPoint, x_vVector4);
                     double l_nPointToPlaneDistance=PointToPlaneDistance(x_vVector4,l_pCoefficient);
-                    double l_nActualError=Math.Sqrt(Math.Pow(l_nDistance-l_nRadius, 2) + Math.Pow(l_nPointToPlaneDistance, 2));
+                    //double l_nActualError=Math.Sqrt(Math.Pow(l_nDistance-l_nRadius, 2) + Math.Pow(l_nPointToPlaneDistance, 2));
+                    double l_nActualError = Math.Sqrt(Math.Pow(Math.Sqrt(Math.Pow(l_nDistance, 2) - Math.Pow(l_nPointToPlaneDistance, 2)) - l_nRadius, 2) + Math.Pow(l_nPointToPlaneDistance, 2));
+
                     if (l_nActualError <= x_nCirclePrecision)
                     //if (Math.Abs(l_nDistance - l_nRadius) <= x_nPrecision)
                     {
@@ -376,6 +415,30 @@ namespace MathMatics
             l_nValue1 = x_pPlaneCoefficient.a * x_vVector.x + x_pPlaneCoefficient.b * x_vVector.y + x_pPlaneCoefficient.c * x_vVector.z + x_pPlaneCoefficient.d;
             l_nValue2 = Math.Abs(l_nValue1) / Math.Sqrt(Math.Pow(x_pPlaneCoefficient.a, 2) + Math.Pow(x_pPlaneCoefficient.b, 2) + Math.Pow(x_pPlaneCoefficient.c, 2));
             return l_nValue2;
+        }
+        public static bool PointProjectToPlane(DataType.BasicDataType.vector x_vVector, DataType.BasicDataType.PlaneCoefficient x_pPlaneCoefficient,out DataType.BasicDataType.vector x_ProjectVector)
+        {
+            bool l_bResult = false;
+            double a = x_pPlaneCoefficient.a;
+            double b = x_pPlaneCoefficient.b;
+            double c = x_pPlaneCoefficient.c;
+            double d = x_pPlaneCoefficient.d;
+            double g=Math.Pow(a, 2) + Math.Pow(b, 2) + Math.Pow(c, 2);
+            if (Math.Pow(a, 2) + Math.Pow(b, 2) + Math.Pow(c, 2) > 0)
+            {
+                double t = (a * x_vVector.x + b * x_vVector.y + c * x_vVector.z + d) / g;
+                x_ProjectVector.x = x_vVector.x - a * t;
+                x_ProjectVector.y = x_vVector.y - b * t;
+                x_ProjectVector.z = x_vVector.z - c * t;
+                l_bResult = true;
+            }
+            else
+            {
+                x_ProjectVector.x = 0;
+                x_ProjectVector.y = 0;
+                x_ProjectVector.z = 0;
+            }
+            return l_bResult;
         }
     }
 }

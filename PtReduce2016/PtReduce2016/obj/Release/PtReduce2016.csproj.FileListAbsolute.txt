@@ -15,3 +15,20 @@ C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtRedu
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Release\PtReduce2016.csproj.GenerateResource.Cache
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Release\PtReduce2016.exe
 C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\PtReduce2016\obj\Release\PtReduce2016.pdb
+F:\程序\PtReduce\PtReduce2016\bin\Release\PtReduce2016.exe.config
+F:\程序\PtReduce\PtReduce2016\obj\Release\PtReduce2016.exe
+F:\程序\PtReduce\PtReduce2016\obj\Release\PtReduce2016.pdb
+F:\程序\PtReduce\PtReduce2016\bin\Release\PtReduce2016.exe
+F:\程序\PtReduce\PtReduce2016\bin\Release\PtReduce2016.pdb
+F:\程序\PtReduce\PtReduce2016\bin\Release\DataProcessTools.dll
+F:\程序\PtReduce\PtReduce2016\bin\Release\DataType.dll
+F:\程序\PtReduce\PtReduce2016\bin\Release\DocTools.dll
+F:\程序\PtReduce\PtReduce2016\bin\Release\MathMatics.dll
+F:\程序\PtReduce\PtReduce2016\bin\Release\DataProcessTools.pdb
+F:\程序\PtReduce\PtReduce2016\bin\Release\DataType.pdb
+F:\程序\PtReduce\PtReduce2016\bin\Release\DocTools.pdb
+F:\程序\PtReduce\PtReduce2016\bin\Release\MathMatics.pdb
+F:\程序\PtReduce\PtReduce2016\obj\Release\PtReduce2016.csprojResolveAssemblyReference.cache
+F:\程序\PtReduce\PtReduce2016\obj\Release\PtReduce2016.PtReuce.resources
+F:\程序\PtReduce\PtReduce2016\obj\Release\PtReduce2016.Properties.Resources.resources
+F:\程序\PtReduce\PtReduce2016\obj\Release\PtReduce2016.csproj.GenerateResource.Cache

@@ -27,8 +27,8 @@ namespace PtReduce2016
 
         private void PtReuce_Load(object sender, EventArgs e)
         {
-            txB_LinePrecison.Text = "0.5";
-            txBCirclePrecision.Text = "0.5";
+            txB_LinePrecison.Text = "0.1";
+            txBCirclePrecision.Text = "0.1";
             
             
            // label_NewPoint.Text=conv
@@ -61,7 +61,7 @@ namespace PtReduce2016
                    //GlobalData.sOldStringLength = l_s.Length;
                    int l_nRemainLength=new int();
                    int l_nOldLength = new int();
-                   bool l_bok = l_ProcessData.PtReduce(l_s, out GlobalData.sOutString, l_nlinePrecision, l_nCirclePrecision, "LaserON", "LaserOFF",ref l_nOldLength, ref l_nRemainLength);
+                   bool l_bok = l_ProcessData.PtReduce(l_s, out GlobalData.sOutString, l_nlinePrecision, l_nCirclePrecision, "TOOLON", "TOOLOFF", ref l_nOldLength, ref l_nRemainLength);
                    
                    label_OldPoint.Text = Convert.ToString(l_nOldLength);
                    label_NewPoint.Text = Convert.ToString(l_nRemainLength);
