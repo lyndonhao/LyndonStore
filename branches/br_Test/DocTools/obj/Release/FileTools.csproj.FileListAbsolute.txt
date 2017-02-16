@@ -1,0 +1,8 @@
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\DocTools\bin\Release\DocTools.dll
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\DocTools\bin\Release\DocTools.pdb
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\DocTools\obj\Release\DocTools.dll
+C:\Users\Administrator\Documents\Visual Studio 2013\Projects\PtReduce2016\DocTools\obj\Release\DocTools.pdb
+F:\程序\PtReduce\DocTools\bin\Release\DocTools.dll
+F:\程序\PtReduce\DocTools\bin\Release\DocTools.pdb
+F:\程序\PtReduce\DocTools\obj\Release\DocTools.dll
+F:\程序\PtReduce\DocTools\obj\Release\DocTools.pdb
